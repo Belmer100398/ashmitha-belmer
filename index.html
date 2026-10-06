@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashmitha &amp; Belmer - Wedding Invitation</title>
+    <link rel="icon" type="image/svg+xml" href="assets/ab-monogram.svg">
+    <meta name="theme-color" content="#2c2c2c">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&amp;family=Montserrat:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-gold: #c5a059;
+            --dark-gold: #9d7d3b;
+            --soft-cream: #fbf9f5;
+            --charcoal: #2c2c2c;
+            --light-bg: #f4f0eb;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--soft-cream);
+            color: var(--charcoal);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .script-font {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        /* Hero Section */
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(rgba(44, 44, 44, 0.4), rgba(44, 44, 44, 0.4)), url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            color: var(--white);
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .hero-content h4 {
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            color: #f0e6d2;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero-content .ampersand {
+            font-style: italic;
+            color: var(--primary-gold);
+            font-weight: 400;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            margin-top: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--dark-gold);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 2px;
+            background-color: var(--primary-gold);
+            margin: 10px auto 0;
+        }
+
+        /* Childhood Memories Section */
+        .memories-section {
+            background-color: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            padding: 4rem 2rem;
+            margin-top: -3rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .kids-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            align-items: center;
+            justify-items: center;
+        }
+
+        .kid-card {
+            text-align: center;
+            background: var(--soft-cream);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            width: 100%;
+            max-width: 350px;
+            transition: transform 0.3s ease;
+        }
+
+        .kid-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .kid-card img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 3px solid var(--primary-gold);
+        }
+
+        .kid-card h3 {
+            font-size: 1.5rem;
+            color: var(--charcoal);
+            margin-bottom: 0.3rem;
+        }
+
+        .kid-card span {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--dark-gold);
+            font-weight: 600;
+        }
+
+        /* Events Section */
+        .events-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .event-card {
+            background: var(--white);
+            padding: 3rem 2rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+            border-top: 4px solid var(--primary-gold);
+            transition: all 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+        }
+
+        .event-card i {
+            font-size: 2.5rem;
+            color: var(--dark-gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .event-card h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--charcoal);
+        }
+
+        .event-date {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark-gold);
+            margin-bottom: 1rem;
+        }
+
+        .event-time {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .event-location {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--dark-gold);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-gold);
+        }
+
+        /* Countdown Section */
+        .countdown-section {
+            background-color: var(--light-bg);
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .countdown-grid {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .countdown-box {
+            background: var(--white);
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+            min-width: 100px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        .countdown-box span {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-gold);
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .countdown-box p {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            background-color: var(--charcoal);
+            color: var(--white);
+        }
+
+        footer h2 {
+            font-size: 2.5rem;
+            color: var(--primary-gold);
+            margin-bottom: 1rem;
+        }
+
+        footer p {
+            font-size: 1rem;
+            color: #bbb;
+            letter-spacing: 1px;
+        }
+
+        .family-note {
+            margin-bottom: 0.45rem;
+            color: #e7d5ad;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            font-style: italic;
+            letter-spacing: 0;
+        }
+
+        .blessing {
+            max-width: 420px;
+            margin: 0 auto 1rem;
+            color: #f4e8ce;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            letter-spacing: 0;
+        }
+
+        .music-credit {
+            margin-top: 1.15rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.66rem;
+            letter-spacing: 0;
+        }
+
+        .music-credit a {
+            color: rgba(245, 221, 168, 0.75);
+        }
+
+        /* Invitation refinements */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            -webkit-font-smoothing: antialiased;
+        }
+
+        header {
+            min-height: max(720px, 100vh);
+            isolation: isolate;
+            overflow: hidden;
+            background-image: linear-gradient(135deg, rgba(25, 24, 22, 0.7), rgba(58, 47, 34, 0.45)), url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1920&q=80');
+        }
+
+        header::before,
+        header::after {
+            content: '';
+            position: absolute;
+            pointer-events: none;
+        }
+
+        header::before {
+            inset: 1.25rem;
+            border: 1px solid rgba(246, 230, 196, 0.55);
+            z-index: 0;
+        }
+
+        header::after {
+            inset: 0;
+            background: radial-gradient(circle at 50% 40%, transparent 0, rgba(0, 0, 0, 0.28) 100%);
+            z-index: 0;
+        }
+
+        .hero-content,
+        .scroll-cue {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 860px;
+        }
+
+        .monogram {
+            width: 4.9rem;
+            height: 4.9rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-gold);
+            border: 1px solid currentColor;
+            border-radius: 50%;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.12em;
+            line-height: 1;
+        }
+
+        .monogram em {
+            position: relative;
+            z-index: 1;
+            margin: 0 -0.12em;
+            font-size: 0.8em;
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .monogram--hero {
+            width: 5.8rem;
+            height: 5.8rem;
+            margin-bottom: 1.7rem;
+            color: #f5dda8;
+            border-color: rgba(245, 221, 168, 0.85);
+            background: rgba(30, 28, 23, 0.2);
+            box-shadow: 0 0 0 0.45rem rgba(245, 221, 168, 0.12);
+            font-size: 2.45rem;
+        }
+
+        .monogram--small {
+            width: 2rem;
+            height: 2rem;
+            flex: 0 0 2rem;
+            font-size: 0.95rem;
+        }
+
+        .hero-content h4 {
+            margin-bottom: 1.25rem;
+            font-size: clamp(0.75rem, 1.7vw, 1rem);
+            font-weight: 500;
+        }
+
+        .hero-content h1 {
+            line-height: 0.95;
+        }
+
+        .hero-date {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 2rem;
+            padding: 0.5rem 1rem;
+            border-top: 1px solid rgba(245, 221, 168, 0.55);
+            border-bottom: 1px solid rgba(245, 221, 168, 0.55);
+            color: #f7ead0;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .hero-date strong {
+            color: var(--primary-gold);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.55rem;
+            line-height: 1;
+        }
+
+        .scroll-cue {
+            position: absolute;
+            left: 50%;
+            bottom: 2.5rem;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-decoration: none;
+            text-transform: uppercase;
+            opacity: 0.85;
+            transform: translateX(-50%);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        .scroll-cue i {
+            color: var(--primary-gold);
+            font-size: 0.9rem;
+            animation: nudge 1.8s ease-in-out infinite;
+        }
+
+        .scroll-cue:hover {
+            opacity: 1;
+            transform: translate(-50%, 3px);
+        }
+
+        section {
+            padding: 6rem 2rem;
+        }
+
+        .section-heading {
+            margin: 0 auto 3rem;
+            max-width: 680px;
+            text-align: center;
+        }
+
+        .section-kicker {
+            margin-bottom: 0.6rem;
+            color: var(--primary-gold);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            margin-bottom: 1rem;
+            font-size: clamp(2.3rem, 4vw, 3.15rem);
+            line-height: 1;
+        }
+
+        .section-title::after {
+            display: none;
+        }
+
+        .heading-ornament {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 1.1rem;
+        }
+
+        .heading-ornament::before,
+        .heading-ornament::after {
+            width: 3.4rem;
+            height: 1px;
+            background: var(--primary-gold);
+            content: '';
+            opacity: 0.75;
+        }
+
+        .section-intro {
+            color: #756f68;
+            font-size: 0.96rem;
+        }
+
+        .memories-section {
+            overflow: hidden;
+            border: 1px solid rgba(197, 160, 89, 0.22);
+            border-radius: 1rem;
+            box-shadow: 0 20px 50px rgba(44, 44, 44, 0.08);
+        }
+
+        .memories-section::before {
+            position: absolute;
+            top: -3.8rem;
+            right: 2rem;
+            color: rgba(197, 160, 89, 0.1);
+            content: 'A&B';
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 9rem;
+            font-style: italic;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .memories-section .section-heading,
+        .kids-grid {
+            position: relative;
+        }
+
+        .kid-card {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(197, 160, 89, 0.15);
+            border-radius: 0.8rem;
+            box-shadow: 0 12px 30px rgba(44, 44, 44, 0.06);
+        }
+
+        .kid-card::before {
+            position: absolute;
+            top: 0.85rem;
+            left: 0.85rem;
+            z-index: 1;
+            width: 2.1rem;
+            height: 2.1rem;
+            display: grid;
+            place-items: center;
+            color: var(--dark-gold);
+            border: 1px solid rgba(157, 125, 59, 0.55);
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            content: 'A&B';
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+        }
+
+        .kid-card img {
+            border-width: 0;
+            border-radius: 0.45rem;
+            transition: transform 0.45s ease;
+        }
+
+        .kid-card:hover img {
+            transform: scale(1.035);
+        }
+
+        .role-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+        }
+
+        .role-label::before,
+        .role-label::after {
+            width: 1.3rem;
+            height: 1px;
+            background: var(--primary-gold);
+            content: '';
+        }
+
+        .events-container {
+            gap: 2.25rem;
+        }
+
+        .event-card {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(197, 160, 89, 0.18);
+            border-top: 4px solid var(--primary-gold);
+            border-radius: 0.8rem;
+            box-shadow: 0 12px 30px rgba(44, 44, 44, 0.06);
+        }
+
+        .event-card::before {
+            position: absolute;
+            right: 1.25rem;
+            bottom: -1.3rem;
+            color: rgba(197, 160, 89, 0.1);
+            content: 'A&B';
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5.5rem;
+            font-style: italic;
+            font-weight: 700;
+        }
+
+        .event-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .event-card .event-icon {
+            display: inline-grid;
+            width: 4.6rem;
+            height: 4.6rem;
+            place-items: center;
+            margin-bottom: 1.25rem;
+            color: var(--dark-gold);
+            border: 1px solid rgba(197, 160, 89, 0.55);
+            border-radius: 50%;
+            background: rgba(197, 160, 89, 0.09);
+            font-size: 1.7rem;
+        }
+
+        .event-card .event-time i,
+        .event-card .event-location i {
+            margin: 0 0.35rem 0 0;
+            color: var(--dark-gold);
+            font-size: 0.9em;
+        }
+
+        .event-date {
+            margin-bottom: 0.55rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+        }
+
+        .event-time {
+            margin-bottom: 0.65rem;
+        }
+
+        .event-location {
+            margin-bottom: 1.8rem;
+        }
+
+        .btn {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--dark-gold), #80652f);
+            box-shadow: 0 5px 12px rgba(92, 71, 27, 0.18);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            box-shadow: 0 8px 16px rgba(92, 71, 27, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .countdown-section {
+            position: relative;
+            max-width: none;
+            margin: 0;
+            overflow: hidden;
+            background: linear-gradient(135deg, #efe8dc, #f7f3ec);
+        }
+
+        .countdown-section::before {
+            position: absolute;
+            top: -5.5rem;
+            left: -1.3rem;
+            color: rgba(197, 160, 89, 0.11);
+            content: 'A&B';
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 13rem;
+            font-style: italic;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .countdown-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .countdown-copy {
+            margin-bottom: 2rem;
+            color: #756f68;
+        }
+
+        .countdown-grid {
+            gap: 1rem;
+        }
+
+        .countdown-box {
+            min-width: 120px;
+            border: 1px solid rgba(197, 160, 89, 0.24);
+            border-radius: 0.75rem;
+            box-shadow: 0 8px 20px rgba(44, 44, 44, 0.05);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .countdown-box:hover {
+            box-shadow: 0 12px 24px rgba(44, 44, 44, 0.09);
+            transform: translateY(-4px);
+        }
+
+        footer {
+            position: relative;
+            overflow: hidden;
+            padding: 4.5rem 2rem 3.5rem;
+        }
+
+        footer::before {
+            position: absolute;
+            inset: 1rem;
+            border: 1px solid rgba(245, 221, 168, 0.2);
+            content: '';
+            pointer-events: none;
+        }
+
+        footer > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .monogram--footer {
+            margin-bottom: 1rem;
+            color: var(--primary-gold);
+            border-color: rgba(197, 160, 89, 0.8);
+        }
+
+        footer h2 {
+            margin-bottom: 0.6rem;
+        }
+
+        @keyframes nudge {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(5px); }
+        }
+
+        @media (max-width: 900px) {
+            section {
+                padding: 5rem 1.25rem;
+            }
+
+            .events-container,
+            .kids-grid {
+                gap: 1.5rem;
+            }
+
+            .countdown-grid {
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                min-height: 680px;
+                padding: 1.5rem;
+            }
+
+            header::before {
+                inset: 0.7rem;
+            }
+
+            .hero-content {
+                max-width: 100%;
+            }
+
+            .hero-content h4 {
+                letter-spacing: 0.17em;
+            }
+
+            .hero-content p {
+                font-size: 0.8rem;
+                letter-spacing: 0.12em;
+            }
+
+            .hero-date {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.35rem 0.45rem;
+                padding: 0.65rem 0.85rem;
+                font-size: 0.61rem;
+            }
+
+            .hero-date strong {
+                font-size: 1.3rem;
+            }
+
+            section,
+            .countdown-section {
+                padding: 4.5rem 1.15rem;
+            }
+
+            .memories-section {
+                padding: 3rem 1rem;
+            }
+
+            .kids-grid,
+            .events-container {
+                gap: 1.25rem;
+            }
+
+            .kid-card img {
+                height: 290px;
+            }
+
+            .event-card {
+                padding: 2.5rem 1.4rem;
+            }
+
+            .countdown-grid {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .countdown-box {
+                min-width: 0;
+                padding: 1.15rem 0.65rem;
+            }
+
+            .countdown-box span {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .hero-content h1 {
+                font-size: clamp(2.5rem, 18vw, 3.6rem);
+            }
+
+            .hero-content p {
+                font-size: 0.72rem;
+            }
+
+            .hero-date {
+                letter-spacing: 0.1em;
+            }
+
+            .countdown-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .kid-card img {
+                height: 250px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background music: Pachelbel's Canon in D, piano transcription performed by Lee Galloway (CC BY-SA 3.0). -->
+    <audio id="background-music" autoplay preload="auto">
+        <source src="assets/canon-in-d-piano.ogg" type="audio/ogg; codecs=vorbis">
+    </audio>
+
+    <!-- Hero Section -->
+    <header>
+        <div class="hero-content">
+            <div class="monogram monogram--hero" aria-label="Ashmitha and Belmer"><span>A</span><em>&amp;</em><span>B</span></div>
+            <h4>Together with our families</h4>
+            <h1>Ashmitha <span class="ampersand">&amp;</span> Belmer</h1>
+            <p>We are getting married</p>
+            <div class="hero-date"><strong>27</strong><span>&amp;</span><strong>28</strong><span>December 2026</span></div>
+        </div>
+        <a class="scroll-cue" href="#our-story">Our story <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
+    </header>
+
+    <main>
+    <!-- Childhood Memories Section -->
+    <section id="our-story">
+        <div class="memories-section">
+            <div class="section-heading">
+                <p class="section-kicker">Our Story</p>
+                <h2 class="section-title">From Childhood to Forever</h2>
+                <div class="heading-ornament" aria-hidden="true"><div class="monogram monogram--small"><span>A</span><em>&amp;</em><span>B</span></div></div>
+                <p class="section-intro">From two little smiles to one beautiful promise — these two kids are getting married now.</p>
+            </div>
+            <div class="kids-grid">
+                <!-- Belmer's Childhood Photo -->
+                <div class="kid-card">
+                    <img src="assets/belmer-childhood.jpeg" alt="Belmer as a child">
+                    <h3>Belmer</h3>
+                    <span class="role-label">Groom</span>
+                </div>
+                <!-- Ashmitha's Childhood Photo -->
+                <div class="kid-card">
+                    <img src="assets/ashmitha-childhood.jpeg" alt="Ashmitha as a child">
+                    <h3>Ashmitha Candish</h3>
+                    <span class="role-label">Bride</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events">
+        <div class="section-heading">
+            <p class="section-kicker">Join the celebration</p>
+            <h2 class="section-title">Wedding Events</h2>
+            <div class="heading-ornament" aria-hidden="true"><div class="monogram monogram--small"><span>A</span><em>&amp;</em><span>B</span></div></div>
+            <p class="section-intro">Your presence will make these moments even more memorable.</p>
+        </div>
+        <div class="events-container">
+            <!-- Engagement Card -->
+            <div class="event-card">
+                <i class="fas fa-ring event-icon" aria-hidden="true"></i>
+                <h3>Engagement</h3>
+                <div class="event-date">December 27</div>
+                <div class="event-location">
+                    <i class="fas fa-map-marker-alt"></i> C.S.I Charode Church
+                </div>
+                <a href="https://maps.google.com/?q=C.S.I+Charode+Church" target="_blank" rel="noopener noreferrer" class="btn">View Map</a>
+            </div>
+
+            <!-- Wedding Ceremony Card -->
+            <div class="event-card">
+                <i class="fas fa-church event-icon" aria-hidden="true"></i>
+                <h3>Marriage Ceremony</h3>
+                <div class="event-date">December 28</div>
+                <div class="event-time"><i class="far fa-clock"></i> 10:00 AM</div>
+                <div class="event-location">
+                    <i class="fas fa-map-marker-alt"></i> C.S.I Charode Church
+                </div>
+                <a href="https://maps.google.com/?q=C.S.I+Charode+Church" target="_blank" rel="noopener noreferrer" class="btn">View Map</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Countdown Section -->
+    <section class="countdown-section" aria-labelledby="countdown-title">
+        <div class="countdown-content">
+            <div class="section-heading">
+                <p class="section-kicker">Save the date</p>
+                <h2 class="section-title" id="countdown-title">Countdown to Our Big Day</h2>
+                <div class="heading-ornament" aria-hidden="true"><div class="monogram monogram--small"><span>A</span><em>&amp;</em><span>B</span></div></div>
+                <p class="countdown-copy">Counting every second until we say “I do”.</p>
+            </div>
+            <div class="countdown-grid" id="countdown">
+                <div class="countdown-box">
+                    <span id="days">00</span>
+                    <p>Days</p>
+                </div>
+                <div class="countdown-box">
+                    <span id="hours">00</span>
+                    <p>Hours</p>
+                </div>
+                <div class="countdown-box">
+                    <span id="minutes">00</span>
+                    <p>Minutes</p>
+                </div>
+                <div class="countdown-box">
+                    <span id="seconds">00</span>
+                    <p>Seconds</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="monogram monogram--footer" aria-label="Ashmitha and Belmer"><span>A</span><em>&amp;</em><span>B</span></div>
+        <h2>Ashmitha &amp; Belmer</h2>
+        <p class="family-note">With love from our families</p>
+        <p class="blessing">Your presence and prayers are the greatest gift to us.</p>
+        <p>We can't wait to celebrate with you!</p>
+        <p class="music-credit">Background piano: <a href="https://commons.wikimedia.org/wiki/File:Pachelbel%27s_Canon.ogg" target="_blank" rel="noopener noreferrer">Canon in D</a> performed by Lee Galloway · <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></p>
+    </footer>
+
+    <!-- Countdown Script -->
+    <script>
+        const backgroundMusic = document.getElementById("background-music");
+
+        if (backgroundMusic) {
+            backgroundMusic.volume = 0.18;
+
+            const startBackgroundMusic = () => {
+                backgroundMusic.play().catch(() => {
+                    // Some browsers require a user interaction before they allow audible autoplay.
+                });
+            };
+
+            startBackgroundMusic();
+            document.addEventListener("pointerdown", startBackgroundMusic, { once: true });
+            document.addEventListener("keydown", startBackgroundMusic, { once: true });
+        }
+
+        const weddingDate = new Date("December 28, 2026 10:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance < 0) {
+                document.getElementById("countdown").innerHTML = "<h3>The Big Day is Here!</h3>";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = String(days).padStart(2, '0');
+            document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+            document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+            document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
