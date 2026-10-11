@@ -34,10 +34,32 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: var(--soft-cream);
+            background:
+                radial-gradient(circle at top, rgba(197, 160, 89, 0.12), transparent 30%),
+                radial-gradient(circle at bottom right, rgba(122, 154, 138, 0.12), transparent 35%),
+                var(--soft-cream);
             color: var(--charcoal);
             line-height: 1.6;
             overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+            background-size: 28px 28px;
+            mask-image: radial-gradient(circle at center, black 25%, transparent 90%);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        header,
+        main,
+        footer {
+            position: relative;
+            z-index: 1;
         }
 
         h1, h2, h3, .script-font {
@@ -60,7 +82,7 @@
 
         .hero-content {
             max-width: 800px;
-            animation: fadeIn 1.5s ease-in-out;
+            animation: fadeInUp 1.3s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .hero-content h4 {
@@ -69,6 +91,7 @@
             text-transform: uppercase;
             margin-bottom: 1rem;
             color: #f0e6d2;
+            text-shadow: 0 0 18px rgba(255, 255, 255, 0.18);
         }
 
         .hero-content h1 {
@@ -143,11 +166,24 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.03);
             width: 100%;
             max-width: 350px;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kid-card::after {
+            content: '';
+            position: absolute;
+            inset: auto -25% -35% auto;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(197, 160, 89, 0.18), transparent 68%);
+            pointer-events: none;
         }
 
         .kid-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 18px 35px rgba(44, 44, 44, 0.12);
         }
 
         .kid-card img {
@@ -181,18 +217,34 @@
         }
 
         .event-card {
-            background: var(--white);
+            background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(250,247,242,1) 100%);
             padding: 3rem 2rem;
-            border-radius: 8px;
+            border-radius: 16px;
             text-align: center;
             box-shadow: 0 8px 25px rgba(0,0,0,0.04);
             border-top: 4px solid var(--primary-gold);
-            transition: all 0.3s ease;
+            border: 1px solid rgba(197, 160, 89, 0.14);
+            transition: all 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.5) 45%, transparent 100%);
+            transform: translateX(-120%);
+            transition: transform 0.8s ease;
         }
 
         .event-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+            transform: translateY(-8px) rotateX(2deg);
+            box-shadow: 0 18px 38px rgba(44, 44, 44, 0.1);
+        }
+
+        .event-card:hover::before {
+            transform: translateX(120%);
         }
 
         .event-card i {
@@ -230,17 +282,35 @@
         .btn {
             display: inline-block;
             padding: 0.8rem 2rem;
-            background-color: var(--dark-gold);
+            background: linear-gradient(135deg, var(--dark-gold), var(--primary-gold));
             color: var(--white);
             text-decoration: none;
             border-radius: 30px;
             font-weight: 500;
             letter-spacing: 1px;
-            transition: background-color 0.3s ease;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+            box-shadow: 0 12px 22px rgba(157, 125, 59, 0.22);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent 35%, rgba(255,255,255,0.4) 50%, transparent 65%);
+            transform: translateX(-130%);
+            transition: transform 0.7s ease;
         }
 
         .btn:hover {
-            background-color: var(--primary-gold);
+            transform: translateY(-2px) scale(1.02);
+            filter: saturate(1.08);
+            box-shadow: 0 18px 28px rgba(157, 125, 59, 0.28);
+        }
+
+        .btn:hover::before {
+            transform: translateX(130%);
         }
 
         /* Countdown Section */
@@ -259,11 +329,22 @@
         }
 
         .countdown-box {
-            background: var(--white);
+            background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(250,247,241,0.96));
             padding: 1.5rem 2rem;
             border-radius: 8px;
             min-width: 100px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(197, 160, 89, 0.22);
+        }
+
+        .countdown-box::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(197, 160, 89, 0.18), transparent 55%);
+            pointer-events: none;
         }
 
         .countdown-box span {
@@ -351,8 +432,11 @@
 
         header::after {
             inset: 0;
-            background: radial-gradient(circle at 50% 40%, transparent 0, rgba(0, 0, 0, 0.28) 100%);
+            background:
+                linear-gradient(110deg, transparent 25%, rgba(255, 244, 220, 0.08) 48%, transparent 68%),
+                radial-gradient(circle at 50% 40%, transparent 0, rgba(0, 0, 0, 0.38) 100%);
             z-index: 0;
+            animation: hero-light-sweep 12s ease-in-out infinite alternate;
         }
 
         .hero-content,
@@ -393,6 +477,7 @@
         .wedding-mark--hero {
             width: min(248px, 74vw);
             margin-bottom: 1.15rem;
+            animation: mark-float 6s ease-in-out infinite;
         }
 
         .wedding-mark--on-dark .wedding-mark__svg {
@@ -507,6 +592,7 @@
             margin-bottom: 1rem;
             font-size: clamp(2.3rem, 4vw, 3.15rem);
             line-height: 1;
+            letter-spacing: 0.015em;
         }
 
         .section-title::after {
@@ -525,9 +611,13 @@
         .heading-ornament::after {
             width: 3.4rem;
             height: 1px;
-            background: var(--primary-gold);
+            background: linear-gradient(90deg, transparent, var(--primary-gold));
             content: '';
             opacity: 0.75;
+        }
+
+        .heading-ornament::after {
+            transform: scaleX(-1);
         }
 
         .section-intro {
@@ -537,9 +627,12 @@
 
         .memories-section {
             overflow: hidden;
-            border: 1px solid rgba(197, 160, 89, 0.22);
-            border-radius: 1rem;
-            box-shadow: 0 20px 50px rgba(44, 44, 44, 0.08);
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            border-radius: 1.15rem;
+            background:
+                linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(251, 249, 245, 0.94)),
+                var(--white);
+            box-shadow: 0 24px 60px rgba(44, 44, 44, 0.09), inset 0 0 0 5px rgba(197, 160, 89, 0.035);
         }
 
         .memories-section::before {
@@ -563,9 +656,16 @@
         .kid-card {
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(197, 160, 89, 0.15);
-            border-radius: 0.8rem;
-            box-shadow: 0 12px 30px rgba(44, 44, 44, 0.06);
+            border: 1px solid rgba(197, 160, 89, 0.25);
+            border-radius: 0.9rem;
+            background: linear-gradient(145deg, #fff, #faf7f1);
+            box-shadow: 0 12px 30px rgba(44, 44, 44, 0.06), inset 0 0 0 4px rgba(197, 160, 89, 0.035);
+            transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.45s ease;
+        }
+
+        .kid-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 22px 42px rgba(44, 44, 44, 0.13), inset 0 0 0 4px rgba(197, 160, 89, 0.08);
         }
 
         .kid-card::before {
@@ -618,10 +718,17 @@
         .event-card {
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(197, 160, 89, 0.18);
+            border: 1px solid rgba(197, 160, 89, 0.28);
             border-top: 4px solid var(--primary-gold);
-            border-radius: 0.8rem;
-            box-shadow: 0 12px 30px rgba(44, 44, 44, 0.06);
+            border-radius: 1rem;
+            background: linear-gradient(145deg, rgba(255,255,255,0.98), rgba(250,247,241,0.96));
+            box-shadow: 0 14px 34px rgba(44, 44, 44, 0.07), inset 0 0 0 4px rgba(197, 160, 89, 0.03);
+            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 24px 45px rgba(44, 44, 44, 0.12), inset 0 0 0 4px rgba(197, 160, 89, 0.07);
         }
 
         .event-card::before {
@@ -652,6 +759,12 @@
             border-radius: 50%;
             background: rgba(197, 160, 89, 0.09);
             font-size: 1.7rem;
+            transition: transform 0.45s ease, background-color 0.45s ease;
+        }
+
+        .event-card:hover .event-icon {
+            transform: rotate(-8deg) scale(1.08);
+            background: rgba(197, 160, 89, 0.17);
         }
 
         .event-card .event-time i,
@@ -728,10 +841,11 @@
 
         .countdown-box {
             min-width: 120px;
-            border: 1px solid rgba(197, 160, 89, 0.24);
+            border: 1px solid rgba(197, 160, 89, 0.32);
             border-radius: 0.75rem;
-            box-shadow: 0 8px 20px rgba(44, 44, 44, 0.05);
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            background: linear-gradient(155deg, rgba(255,255,255,0.96), rgba(250,247,241,0.96));
+            box-shadow: 0 8px 20px rgba(44, 44, 44, 0.05), inset 0 0 0 4px rgba(197, 160, 89, 0.035);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .countdown-box:hover {
@@ -762,9 +876,102 @@
             margin-bottom: 0.6rem;
         }
 
+        .ambient-bg {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        #celebration-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.55;
+        }
+
+        .ambient-orb,
+        .ambient-sparkle,
+        .falling-petal {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.7;
+            filter: blur(0.6px);
+            animation: drift 18s ease-in-out infinite alternate;
+        }
+
+        .ambient-orb {
+            width: 260px;
+            height: 260px;
+            background: radial-gradient(circle, rgba(245, 221, 168, 0.35), rgba(197, 160, 89, 0.08), transparent 72%);
+        }
+
+        .ambient-sparkle {
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, rgba(255,255,255,0.9), rgba(197,160,89,0.38), transparent 68%);
+            box-shadow: 0 0 18px rgba(245,221,168,0.8);
+            animation: sparkle 6s ease-in-out infinite;
+        }
+
+        .falling-petal {
+            top: -8vh;
+            width: 13px;
+            height: 19px;
+            border-radius: 80% 15% 75% 20%;
+            background: linear-gradient(145deg, rgba(255, 248, 232, 0.9), rgba(197, 160, 89, 0.52));
+            box-shadow: 0 2px 8px rgba(157, 125, 59, 0.12);
+            animation-name: petal-fall;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+
+        .reveal {
+            transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+            will-change: opacity, transform;
+        }
+
+        html.motion-ready .reveal {
+            opacity: 0;
+            transform: translateY(32px) scale(0.985);
+        }
+
+        html.motion-ready .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         @keyframes nudge {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(5px); }
+        }
+
+        @keyframes drift {
+            0% { transform: translate3d(0, 0, 0) scale(0.95); }
+            100% { transform: translate3d(30px, -18px, 0) scale(1.08); }
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        @keyframes petal-fall {
+            0% { transform: translate3d(0, -10vh, 0) rotate(0deg); }
+            50% { transform: translate3d(var(--petal-sway), 52vh, 0) rotate(240deg); }
+            100% { transform: translate3d(var(--petal-sway-back), 112vh, 0) rotate(540deg); }
+        }
+
+        @keyframes mark-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-7px); }
+        }
+
+        @keyframes hero-light-sweep {
+            from { background-position: -120% center, center; }
+            to { background-position: 220% center, center; }
         }
 
         @media (max-width: 900px) {
@@ -886,15 +1093,40 @@
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
             }
+
+            html.motion-ready .reveal {
+                opacity: 1;
+                transform: none;
+                will-change: auto;
+            }
+
+            #celebration-canvas,
+            .falling-petal {
+                display: none;
+            }
         }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="ambient-bg" aria-hidden="true" id="ambient-bg">
+        <canvas id="celebration-canvas"></canvas>
+    </div>
     <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" focusable="false" aria-hidden="true" style="position:absolute">
         <defs>
             <linearGradient id="mark-gold" x1="18%" y1="8%" x2="82%" y2="92%">
@@ -972,8 +1204,8 @@
 
     <main>
     <!-- Childhood Memories Section -->
-    <section id="our-story">
-        <div class="memories-section">
+    <section id="our-story" class="reveal">
+        <div class="memories-section reveal">
             <div class="section-heading">
                 <p class="section-kicker">Our Story</p>
                 <h2 class="section-title">A New Beginning</h2>
@@ -982,13 +1214,13 @@
             </div>
             <div class="kids-grid">
                 <!-- Belmer's Childhood Photo -->
-                <div class="kid-card">
+                <div class="kid-card reveal">
                     <img src="assets/belmer-childhood.jpeg" alt="Belmer as a child">
                     <h3>Belmer</h3>
                     <span class="role-label">Groom</span>
                 </div>
                 <!-- Ashmitha's Childhood Photo -->
-                <div class="kid-card">
+                <div class="kid-card reveal">
                     <img src="assets/ashmitha-childhood.jpeg" alt="Ashmitha as a child">
                     <h3>Ashmitha Candish</h3>
                     <span class="role-label">Bride</span>
@@ -998,8 +1230,8 @@
     </section>
 
     <!-- Events Section -->
-    <section id="events">
-        <div class="section-heading">
+    <section id="events" class="reveal">
+        <div class="section-heading reveal">
             <p class="section-kicker">Join the celebration</p>
             <h2 class="section-title">Wedding Events</h2>
             <div class="heading-ornament" aria-hidden="true"><figure class="wedding-mark wedding-mark--small"><svg class="wedding-mark__svg" viewBox="0 0 160 130"><use href="#wedding-mark-icon"/></svg></figure></div>
@@ -1007,7 +1239,7 @@
         </div>
         <div class="events-container">
             <!-- Engagement Card -->
-            <div class="event-card">
+            <div class="event-card reveal">
                 <i class="fas fa-ring event-icon" aria-hidden="true"></i>
                 <h3>Engagement</h3>
                 <div class="event-date">December 27</div>
@@ -1019,7 +1251,7 @@
             </div>
 
             <!-- Wedding Ceremony Card -->
-            <div class="event-card">
+            <div class="event-card reveal">
                 <i class="fas fa-church event-icon" aria-hidden="true"></i>
                 <h3>Marriage Ceremony</h3>
                 <div class="event-date">December 28</div>
@@ -1033,8 +1265,8 @@
     </section>
 
     <!-- Countdown Section -->
-    <section class="countdown-section" aria-labelledby="countdown-title">
-        <div class="countdown-content">
+    <section class="countdown-section reveal" aria-labelledby="countdown-title">
+        <div class="countdown-content reveal">
             <div class="section-heading">
                 <p class="section-kicker">Save the date</p>
                 <h2 class="section-title" id="countdown-title">Countdown to Our Big Day</h2>
@@ -1042,19 +1274,19 @@
                 <p class="countdown-copy">Counting every second until we say “I do”.</p>
             </div>
             <div class="countdown-grid" id="countdown">
-                <div class="countdown-box">
+                <div class="countdown-box reveal">
                     <span id="days">00</span>
                     <p>Days</p>
                 </div>
-                <div class="countdown-box">
+                <div class="countdown-box reveal">
                     <span id="hours">00</span>
                     <p>Hours</p>
                 </div>
-                <div class="countdown-box">
+                <div class="countdown-box reveal">
                     <span id="minutes">00</span>
                     <p>Minutes</p>
                 </div>
-                <div class="countdown-box">
+                <div class="countdown-box reveal">
                     <span id="seconds">00</span>
                     <p>Seconds</p>
                 </div>
@@ -1064,7 +1296,7 @@
     </main>
 
     <!-- Footer -->
-    <footer>
+    <footer class="reveal">
         <figure class="wedding-mark wedding-mark--on-dark wedding-mark--footer" role="img" aria-label="Ashmitha Candish and Belmer, 2026">
             <svg class="wedding-mark__svg" viewBox="0 0 240 260" aria-hidden="true"><use href="#wedding-mark"/></svg>
         </figure>
@@ -1090,6 +1322,149 @@
             startBackgroundMusic();
             document.addEventListener("pointerdown", startBackgroundMusic, { once: true });
             document.addEventListener("keydown", startBackgroundMusic, { once: true });
+        }
+
+        const ambientBg = document.getElementById('ambient-bg');
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (ambientBg && !reduceMotion) {
+            const sparkleCount = window.innerWidth < 600 ? 10 : 18;
+
+            for (let i = 0; i < sparkleCount; i += 1) {
+                const sparkle = document.createElement('span');
+                sparkle.className = 'ambient-sparkle';
+                const size = 5 + Math.random() * 10;
+                sparkle.style.width = `${size}px`;
+                sparkle.style.height = `${size}px`;
+                sparkle.style.left = `${Math.random() * 100}%`;
+                sparkle.style.top = `${Math.random() * 100}%`;
+                sparkle.style.animationDelay = `${(Math.random() * 5).toFixed(2)}s`;
+                sparkle.style.animationDuration = `${(6 + Math.random() * 8).toFixed(2)}s`;
+                sparkle.style.opacity = String(0.2 + Math.random() * 0.45);
+                ambientBg.appendChild(sparkle);
+            }
+
+            for (let i = 0; i < 3; i += 1) {
+                const orb = document.createElement('span');
+                orb.className = 'ambient-orb';
+                orb.style.left = `${10 + Math.random() * 75}%`;
+                orb.style.top = `${8 + Math.random() * 72}%`;
+                orb.style.width = `${180 + Math.random() * 220}px`;
+                orb.style.height = `${180 + Math.random() * 220}px`;
+                orb.style.animationDelay = `${(Math.random() * 8).toFixed(2)}s`;
+                ambientBg.appendChild(orb);
+            }
+
+            for (let i = 0; i < 12; i += 1) {
+                const petal = document.createElement('span');
+                const sway = Math.round((Math.random() - 0.5) * 180);
+                petal.className = 'falling-petal';
+                petal.style.left = `${Math.random() * 100}%`;
+                petal.style.width = `${7 + Math.random() * 9}px`;
+                petal.style.height = `${11 + Math.random() * 12}px`;
+                petal.style.opacity = String(0.18 + Math.random() * 0.3);
+                petal.style.animationDuration = `${18 + Math.random() * 20}s`;
+                petal.style.animationDelay = `${-Math.random() * 35}s`;
+                petal.style.setProperty('--petal-sway', `${sway}px`);
+                petal.style.setProperty('--petal-sway-back', `${Math.round(sway * -0.65)}px`);
+                ambientBg.appendChild(petal);
+            }
+        }
+
+        const celebrationCanvas = document.getElementById('celebration-canvas');
+        const canvasContext = celebrationCanvas instanceof HTMLCanvasElement
+            ? celebrationCanvas.getContext('2d')
+            : null;
+
+        if (celebrationCanvas instanceof HTMLCanvasElement && canvasContext && !reduceMotion) {
+            let canvasWidth = 0;
+            let canvasHeight = 0;
+            let animationFrame = 0;
+            let particles = [];
+
+            const resizeCanvas = () => {
+                const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
+                canvasWidth = window.innerWidth;
+                canvasHeight = window.innerHeight;
+                celebrationCanvas.width = Math.round(canvasWidth * pixelRatio);
+                celebrationCanvas.height = Math.round(canvasHeight * pixelRatio);
+                canvasContext.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+                const particleCount = Math.max(24, Math.min(64, Math.round(canvasWidth / 22)));
+                particles = Array.from({ length: particleCount }, () => ({
+                    x: Math.random() * canvasWidth,
+                    y: Math.random() * canvasHeight,
+                    radius: 0.6 + Math.random() * 1.2,
+                    speedX: (Math.random() - 0.5) * 0.12,
+                    speedY: 0.05 + Math.random() * 0.12
+                }));
+            };
+
+            const drawConstellation = () => {
+                canvasContext.clearRect(0, 0, canvasWidth, canvasHeight);
+
+                particles.forEach((particle, index) => {
+                    particle.x += particle.speedX;
+                    particle.y += particle.speedY;
+                    if (particle.x < 0 || particle.x > canvasWidth) particle.speedX *= -1;
+                    if (particle.y > canvasHeight) particle.y = 0;
+
+                    canvasContext.beginPath();
+                    canvasContext.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+                    canvasContext.fillStyle = 'rgba(157, 125, 59, 0.38)';
+                    canvasContext.fill();
+
+                    for (let nextIndex = index + 1; nextIndex < particles.length; nextIndex += 1) {
+                        const nextParticle = particles[nextIndex];
+                        const distanceX = particle.x - nextParticle.x;
+                        const distanceY = particle.y - nextParticle.y;
+                        const distance = Math.hypot(distanceX, distanceY);
+
+                        if (distance < 105) {
+                            canvasContext.beginPath();
+                            canvasContext.moveTo(particle.x, particle.y);
+                            canvasContext.lineTo(nextParticle.x, nextParticle.y);
+                            canvasContext.strokeStyle = `rgba(197, 160, 89, ${(1 - distance / 105) * 0.12})`;
+                            canvasContext.lineWidth = 0.6;
+                            canvasContext.stroke();
+                        }
+                    }
+                });
+
+                if (!document.hidden) {
+                    animationFrame = window.requestAnimationFrame(drawConstellation);
+                }
+            };
+
+            const handleVisibilityChange = () => {
+                if (document.hidden) {
+                    window.cancelAnimationFrame(animationFrame);
+                    animationFrame = 0;
+                } else if (!animationFrame) {
+                    animationFrame = window.requestAnimationFrame(drawConstellation);
+                }
+            };
+
+            resizeCanvas();
+            animationFrame = window.requestAnimationFrame(drawConstellation);
+            window.addEventListener('resize', resizeCanvas, { passive: true });
+            document.addEventListener('visibilitychange', handleVisibilityChange);
+        }
+
+        document.documentElement.classList.add('motion-ready');
+        const revealElements = document.querySelectorAll('.reveal');
+        if (reduceMotion || !('IntersectionObserver' in window)) {
+            revealElements.forEach((element) => element.classList.add('visible'));
+        } else {
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            revealElements.forEach((element) => revealObserver.observe(element));
         }
 
         const weddingDate = new Date("December 28, 2026 9:15:00").getTime();
