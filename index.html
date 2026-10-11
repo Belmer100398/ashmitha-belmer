@@ -291,6 +291,109 @@
             margin-bottom: 2rem;
         }
 
+        #wedding-gallery[hidden] {
+            display: none;
+        }
+
+        .wedding-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+            gap: 1.25rem;
+        }
+
+        .wedding-gallery-photo {
+            margin: 0;
+            overflow: hidden;
+            border: 1px solid rgba(197, 160, 89, 0.24);
+            border-radius: 14px;
+            background: var(--white);
+            box-shadow: 0 8px 24px rgba(44, 44, 44, 0.07);
+        }
+
+        .wedding-gallery-photo button {
+            display: block;
+            width: 100%;
+            padding: 0;
+            overflow: hidden;
+            border: 0;
+            background: transparent;
+            cursor: zoom-in;
+        }
+
+        .wedding-gallery-photo button:focus-visible,
+        .wedding-gallery-lightbox__close:focus-visible {
+            outline: 2px solid var(--dark-gold);
+            outline-offset: 4px;
+        }
+
+        .wedding-gallery-photo img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            transition: transform 0.45s ease;
+        }
+
+        .wedding-gallery-photo button:hover img {
+            transform: scale(1.04);
+        }
+
+        .wedding-gallery-photo figcaption {
+            padding: 0.8rem 1rem;
+            color: var(--dark-gold);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .wedding-gallery-lightbox {
+            position: fixed;
+            inset: 0;
+            width: min(92vw, 1100px);
+            max-width: none;
+            max-height: 90vh;
+            margin: auto;
+            padding: 3.5rem 1rem 1rem;
+            overflow: auto;
+            border: 1px solid rgba(245, 221, 168, 0.55);
+            border-radius: 16px;
+            background: #211f1c;
+            color: var(--white);
+        }
+
+        .wedding-gallery-lightbox::backdrop {
+            background: rgba(20, 18, 16, 0.86);
+            backdrop-filter: blur(5px);
+        }
+
+        .wedding-gallery-lightbox img {
+            width: 100%;
+            max-height: calc(90vh - 6rem);
+            object-fit: contain;
+        }
+
+        .wedding-gallery-lightbox figcaption {
+            padding-top: 0.7rem;
+            color: #f0e6d2;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+
+        .wedding-gallery-lightbox__close {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            display: grid;
+            width: 2.5rem;
+            height: 2.5rem;
+            place-items: center;
+            border: 1px solid rgba(245, 221, 168, 0.5);
+            border-radius: 50%;
+            background: transparent;
+            color: var(--white);
+            cursor: pointer;
+        }
+
         .btn {
             display: inline-block;
             padding: 0.8rem 2rem;
@@ -1616,6 +1719,16 @@
         </div>
     </section>
 
+    <section id="wedding-gallery" class="reveal" aria-labelledby="wedding-gallery-title" hidden>
+        <div class="section-heading reveal">
+            <p class="section-kicker">Our favorite moments</p>
+            <h2 class="section-title" id="wedding-gallery-title">The Wedding Gallery</h2>
+            <div class="heading-ornament" aria-hidden="true"><figure class="wedding-mark wedding-mark--small"><svg class="wedding-mark__svg" viewBox="0 0 160 130"><use href="#wedding-mark-icon"/></svg></figure></div>
+            <p class="section-intro">A few treasured moments from our celebration.</p>
+        </div>
+        <div class="wedding-gallery-grid" id="wedding-gallery-grid"></div>
+    </section>
+
     <!-- Countdown Section -->
     <section class="countdown-section reveal" aria-labelledby="countdown-title">
         <div class="countdown-content reveal">
@@ -1657,6 +1770,16 @@
         <p class="blessing">Your presence and prayers are the greatest gift to us.</p>
         <p>We can't wait to celebrate with you!</p>
     </footer>
+
+    <dialog class="wedding-gallery-lightbox" id="wedding-gallery-lightbox" aria-label="Wedding photo">
+        <button class="wedding-gallery-lightbox__close" id="wedding-gallery-close" type="button" aria-label="Close photo">
+            <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+        <figure>
+            <img id="wedding-gallery-lightbox-image" alt="">
+            <figcaption id="wedding-gallery-lightbox-caption"></figcaption>
+        </figure>
+    </dialog>
 
     <!-- Countdown Script -->
     <script>
@@ -1753,6 +1876,83 @@
         const confettiContext = dateConfetti instanceof HTMLCanvasElement
             ? dateConfetti.getContext('2d')
             : null;
+
+        // Add entries like { src: 'assets/wedding-gallery/ceremony.jpg', alt: 'Ashmitha and Belmer at the ceremony', caption: 'Our ceremony' } after the celebration.
+        const weddingGalleryPhotos = [];
+        const weddingGallerySection = document.getElementById('wedding-gallery');
+        const weddingGalleryGrid = document.getElementById('wedding-gallery-grid');
+        const weddingGalleryLightbox = document.getElementById('wedding-gallery-lightbox');
+        const weddingGalleryLightboxImage = document.getElementById('wedding-gallery-lightbox-image');
+        const weddingGalleryLightboxCaption = document.getElementById('wedding-gallery-lightbox-caption');
+        const weddingGalleryClose = document.getElementById('wedding-gallery-close');
+
+        const renderWeddingGallery = (photos) => {
+            if (!weddingGallerySection || !weddingGalleryGrid) {
+                return;
+            }
+
+            weddingGalleryGrid.replaceChildren();
+            if (photos.length === 0) {
+                weddingGallerySection.hidden = true;
+                return;
+            }
+
+            let renderedPhotos = 0;
+            photos.forEach((photo) => {
+                if (!photo.src || !photo.alt) {
+                    console.error('Skipping a wedding gallery photo without a source or descriptive alt text.', photo);
+                    return;
+                }
+
+                const figure = document.createElement('figure');
+                figure.className = 'wedding-gallery-photo';
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.setAttribute('aria-label', `View photo: ${photo.alt}`);
+                const image = document.createElement('img');
+                image.src = photo.src;
+                image.alt = photo.alt;
+                image.loading = 'lazy';
+                image.addEventListener('error', () => {
+                    console.error(`Wedding gallery photo could not be loaded: ${photo.src}`);
+                });
+                button.appendChild(image);
+                figure.appendChild(button);
+
+                if (photo.caption) {
+                    const caption = document.createElement('figcaption');
+                    caption.textContent = photo.caption;
+                    figure.appendChild(caption);
+                }
+
+                button.addEventListener('click', () => {
+                    weddingGalleryLightboxImage.src = photo.src;
+                    weddingGalleryLightboxImage.alt = photo.alt;
+                    weddingGalleryLightboxCaption.textContent = photo.caption || '';
+                    weddingGalleryLightboxCaption.hidden = !photo.caption;
+                    weddingGalleryLightbox.showModal();
+                });
+
+                weddingGalleryGrid.appendChild(figure);
+                renderedPhotos += 1;
+            });
+
+            weddingGallerySection.hidden = renderedPhotos === 0;
+        };
+
+        renderWeddingGallery(weddingGalleryPhotos);
+        weddingGalleryClose.addEventListener('click', () => weddingGalleryLightbox.close());
+        weddingGalleryLightbox.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                event.preventDefault();
+                weddingGalleryLightbox.close();
+            }
+        });
+        weddingGalleryLightbox.addEventListener('click', (event) => {
+            if (event.target === weddingGalleryLightbox) {
+                weddingGalleryLightbox.close();
+            }
+        });
 
         const launchDateConfetti = (source) => {
             if (!(dateConfetti instanceof HTMLCanvasElement) || !confettiContext || reduceMotion) {
