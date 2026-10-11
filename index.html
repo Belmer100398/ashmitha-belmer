@@ -6,6 +6,18 @@
     <title>Ashmitha &amp; Belmer - Wedding Invitation</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon-mark.svg">
     <meta name="theme-color" content="#2c2c2c">
+    <script>
+        try {
+            if (sessionStorage.getItem('wedding-invite-opened') === 'true') {
+                document.documentElement.classList.add('intro-seen');
+                document.documentElement.classList.add('invitation-opened');
+            } else {
+                document.documentElement.classList.add('intro-active');
+            }
+        } catch (storageError) {
+            console.warn('The invitation opening animation could not store its visit state.', storageError);
+        }
+    </script>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&amp;family=Montserrat:wght@300;400;500;600&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
     <!-- FontAwesome for Icons -->
@@ -517,14 +529,33 @@
             line-height: 0.95;
         }
 
+        .hero-content h1 .name-foil {
+            display: inline-block;
+            color: transparent;
+            background: linear-gradient(105deg, #fff 0%, #fff 33%, #f7e8c7 45%, #fff 53%, #fff 100%);
+            background-size: 240% 100%;
+            background-position: 110% center;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        html.invitation-opened .hero-content h1 .name-foil {
+            animation: name-foil 2.4s cubic-bezier(0.2, 0.7, 0.2, 1) 0.15s both;
+        }
+
         .hero-date {
+            position: relative;
             display: inline-flex;
             align-items: center;
             gap: 0.75rem;
             margin-top: 2rem;
-            padding: 0.5rem 1rem;
-            border-top: 1px solid rgba(245, 221, 168, 0.55);
-            border-bottom: 1px solid rgba(245, 221, 168, 0.55);
+            min-height: 3.5rem;
+            padding: 0;
+            border: 1px solid rgba(245, 221, 168, 0.7);
+            border-radius: 999px;
+            background: rgba(31, 27, 21, 0.28);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.14), inset 0 0 0 3px rgba(245, 221, 168, 0.06);
             color: #f7ead0;
             font-size: 0.75rem;
             font-weight: 600;
@@ -532,11 +563,58 @@
             text-transform: uppercase;
         }
 
+        .hero-date__content {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 1.25rem;
+            white-space: nowrap;
+        }
+
         .hero-date strong {
-            color: var(--primary-gold);
+            color: #f2d997;
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.55rem;
             line-height: 1;
+        }
+
+        .hero-date-scratch {
+            appearance: none;
+            border: 0;
+            color: inherit;
+            font: inherit;
+            cursor: crosshair;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: none;
+        }
+
+        .hero-date-scratch:focus-visible {
+            outline: 2px solid #fff2d2;
+            outline-offset: 5px;
+        }
+
+        .date-scratch-cover {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            transition: opacity 0.65s ease, visibility 0.65s ease;
+            touch-action: none;
+        }
+
+        .hero-date-scratch.is-revealed .date-scratch-cover {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .date-scratch-hint {
+            margin-top: 0.65rem !important;
+            color: rgba(255, 248, 232, 0.8);
+            font-size: 0.58rem !important;
+            letter-spacing: 0.22em !important;
+            animation: hint-pulse 2.8s ease-in-out infinite;
         }
 
         .scroll-cue {
@@ -767,6 +845,27 @@
             background: rgba(197, 160, 89, 0.17);
         }
 
+        .events-container .event-card:first-child {
+            --timeline-offset: -36px;
+        }
+
+        .events-container .event-card:last-child {
+            --timeline-offset: 36px;
+        }
+
+        html.motion-ready .events-container .event-card {
+            transform: translateX(var(--timeline-offset, 0)) translateY(28px);
+            transition-delay: 0s;
+        }
+
+        html.motion-ready .events-container .event-card.visible {
+            transform: translateX(0) translateY(0);
+        }
+
+        html.motion-ready .events-container .event-card.visible:last-child {
+            transition-delay: 0.2s;
+        }
+
         .event-card .event-time i,
         .event-card .event-location i {
             margin: 0 0.35rem 0 0;
@@ -884,6 +983,248 @@
             overflow: hidden;
         }
 
+        .invitation-intro {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            padding: 2rem;
+            background:
+                radial-gradient(ellipse at center, rgba(97, 77, 47, 0.22), transparent 58%),
+                linear-gradient(145deg, #26231f, #171614 70%);
+            color: #f7ead0;
+            text-align: center;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.85s ease, visibility 0.85s ease;
+        }
+
+        html.intro-active .invitation-intro {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        html.intro-seen .invitation-intro {
+            display: none;
+        }
+
+        html.intro-active body {
+            overflow: hidden;
+        }
+
+        .invitation-intro::before,
+        .invitation-intro::after {
+            position: absolute;
+            content: '';
+            pointer-events: none;
+        }
+
+        .invitation-intro::before {
+            inset: 1.1rem;
+            border: 1px solid rgba(245, 221, 168, 0.35);
+        }
+
+        .invitation-intro::after {
+            width: min(78vw, 560px);
+            aspect-ratio: 1;
+            border: 1px solid rgba(245, 221, 168, 0.08);
+            border-radius: 50%;
+            box-shadow: 0 0 0 24px rgba(245, 221, 168, 0.025), 0 0 0 48px rgba(245, 221, 168, 0.02);
+        }
+
+        .intro-scene {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            justify-items: center;
+            gap: 1.35rem;
+            width: min(100%, 440px);
+            animation: intro-arrive 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+        }
+
+        .intro-kicker {
+            color: #e4c986;
+            font-size: 0.63rem;
+            font-weight: 500;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+        }
+
+        .intro-envelope {
+            position: relative;
+            display: block;
+            width: min(78vw, 340px);
+            aspect-ratio: 1.48;
+            border: 0;
+            padding: 0;
+            background: transparent;
+            cursor: pointer;
+            filter: drop-shadow(0 24px 28px rgba(0, 0, 0, 0.35));
+            perspective: 900px;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .intro-envelope:focus-visible,
+        .intro-skip:focus-visible {
+            outline: 2px solid #f5dda8;
+            outline-offset: 7px;
+        }
+
+        .intro-envelope__letter {
+            position: absolute;
+            inset: 9% 12% 10%;
+            display: grid;
+            align-content: center;
+            gap: 0.45rem;
+            border: 1px solid rgba(157, 125, 59, 0.55);
+            background: linear-gradient(145deg, #fffaf0, #ead8b5);
+            color: #6d542e;
+            transition: transform 0.85s cubic-bezier(0.2, 0.75, 0.2, 1) 0.25s;
+        }
+
+        .intro-envelope__letter strong {
+            font-family: 'Pinyon Script', cursive;
+            font-size: clamp(2.5rem, 10vw, 4.2rem);
+            font-weight: 400;
+            line-height: 1;
+        }
+
+        .intro-envelope__letter span {
+            font-size: 0.53rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+        }
+
+        .intro-envelope__body {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            background: linear-gradient(155deg, #ead5aa, #bd9a5d);
+            clip-path: polygon(0 0, 50% 54%, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .intro-envelope__body::before,
+        .intro-envelope__body::after {
+            position: absolute;
+            inset: 0;
+            content: '';
+            pointer-events: none;
+        }
+
+        .intro-envelope__body::before {
+            background: linear-gradient(35deg, rgba(115, 81, 34, 0.15), transparent 45%);
+            clip-path: polygon(0 0, 50% 54%, 0 100%);
+        }
+
+        .intro-envelope__body::after {
+            background: linear-gradient(-35deg, rgba(255, 250, 235, 0.3), transparent 45%);
+            clip-path: polygon(100% 0, 50% 54%, 100% 100%);
+        }
+
+        .intro-envelope__flap {
+            position: absolute;
+            inset: 0 0 auto;
+            height: 66%;
+            transform-origin: top center;
+            transform-style: preserve-3d;
+            transition: transform 0.72s cubic-bezier(0.2, 0.75, 0.2, 1);
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            background: linear-gradient(160deg, #f2dfb9, #c9a96d);
+            z-index: 2;
+        }
+
+        .intro-envelope__seal {
+            position: absolute;
+            z-index: 3;
+            top: 48%;
+            left: 50%;
+            display: grid;
+            width: 3.4rem;
+            aspect-ratio: 1;
+            place-items: center;
+            transform: translate(-50%, -50%);
+            border: 1px solid rgba(255, 237, 191, 0.8);
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, #d9bb78, #8f6d37);
+            box-shadow: 0 4px 14px rgba(61, 42, 18, 0.35), inset 0 0 0 3px rgba(255, 255, 255, 0.15);
+            color: #fff4dc;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            transition: opacity 0.25s ease, transform 0.35s ease;
+        }
+
+        .intro-envelope:hover .intro-envelope__seal {
+            transform: translate(-50%, -50%) scale(1.08) rotate(-7deg);
+        }
+
+        .intro-instruction {
+            color: rgba(255, 248, 232, 0.78);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            font-style: italic;
+        }
+
+        .intro-skip {
+            border: 0;
+            padding: 0.4rem 0.7rem;
+            background: transparent;
+            color: rgba(255, 248, 232, 0.68);
+            cursor: pointer;
+            font: inherit;
+            font-size: 0.67rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-underline-offset: 0.25rem;
+            text-decoration: underline;
+            text-decoration-color: rgba(245, 221, 168, 0.35);
+        }
+
+        .invitation-intro.is-opening .intro-envelope__flap {
+            transform: rotateX(180deg);
+        }
+
+        .invitation-intro.is-opening .intro-envelope__letter {
+            transform: translateY(-38%);
+        }
+
+        .invitation-intro.is-opening .intro-envelope__seal {
+            opacity: 0;
+            transform: translate(-50%, -80%) scale(0.5);
+        }
+
+        .invitation-intro.is-dismissed {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .intro-sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        #date-confetti {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
         #celebration-canvas {
             position: absolute;
             inset: 0;
@@ -974,6 +1315,21 @@
             to { background-position: 220% center, center; }
         }
 
+        @keyframes name-foil {
+            from { background-position: -130% center; }
+            to { background-position: 110% center; }
+        }
+
+        @keyframes hint-pulse {
+            0%, 100% { opacity: 0.72; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes intro-arrive {
+            from { opacity: 0; transform: translateY(16px) scale(0.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
         @media (max-width: 900px) {
             section {
                 padding: 5rem 1.25rem;
@@ -1013,12 +1369,16 @@
             }
 
             .hero-date {
-                display: flex;
+                display: inline-flex;
                 flex-wrap: wrap;
                 justify-content: center;
                 gap: 0.35rem 0.45rem;
-                padding: 0.65rem 0.85rem;
                 font-size: 0.61rem;
+            }
+
+            .hero-date__content {
+                gap: 0.45rem;
+                padding: 0.65rem 0.85rem;
             }
 
             .hero-date strong {
@@ -1101,8 +1461,21 @@
             }
 
             #celebration-canvas,
-            .falling-petal {
+            .falling-petal,
+            #date-confetti {
                 display: none;
+            }
+
+            .invitation-intro {
+                transition-duration: 0.01ms !important;
+            }
+
+            .intro-envelope *,
+            .intro-scene,
+            .hero-date-scratch *,
+            .events-container .event-card {
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
             }
         }
 
@@ -1126,6 +1499,23 @@
 <body>
     <div class="ambient-bg" aria-hidden="true" id="ambient-bg">
         <canvas id="celebration-canvas"></canvas>
+    </div>
+    <canvas id="date-confetti" aria-hidden="true"></canvas>
+    <div class="invitation-intro" id="invitation-intro" role="dialog" aria-modal="true" aria-labelledby="intro-title">
+        <div class="intro-scene">
+            <p class="intro-kicker" id="intro-title">A celebration of love</p>
+            <button class="intro-envelope" id="open-invitation" type="button" aria-label="Open Ashmitha and Belmer's wedding invitation">
+                <span class="intro-envelope__letter" aria-hidden="true">
+                    <strong>A &amp; B</strong>
+                    <span>You're invited</span>
+                </span>
+                <span class="intro-envelope__body" aria-hidden="true"></span>
+                <span class="intro-envelope__flap" aria-hidden="true"></span>
+                <span class="intro-envelope__seal" aria-hidden="true">A&amp;B</span>
+            </button>
+            <p class="intro-instruction">Tap the seal to open your invitation</p>
+            <button class="intro-skip" id="skip-intro" type="button">Skip animation</button>
+        </div>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" focusable="false" aria-hidden="true" style="position:absolute">
         <defs>
@@ -1195,9 +1585,13 @@
                 <svg class="wedding-mark__svg" viewBox="0 0 240 260" aria-hidden="true"><use href="#wedding-mark"/></svg>
             </figure>
             <h4>Together with our families</h4>
-            <h1>Ashmitha <span class="ampersand">&amp;</span> Belmer</h1>
+            <h1><span class="name-foil">Ashmitha</span> <span class="ampersand">&amp;</span> <span class="name-foil">Belmer</span></h1>
             <p>We are getting married</p>
-            <div class="hero-date"><strong>27</strong><span>&amp;</span><strong>28</strong><span>December 2026</span></div>
+            <button class="hero-date hero-date-scratch" id="scratch-date" type="button" aria-label="Scratch to reveal our wedding dates, 27 and 28 December 2026">
+                <span class="hero-date__content" aria-hidden="true"><strong>27</strong><span>&amp;</span><strong>28</strong><span>December 2026</span></span>
+                <canvas class="date-scratch-cover" id="date-scratch-cover" aria-hidden="true"></canvas>
+            </button>
+            <p class="date-scratch-hint" aria-live="polite">A little surprise — rub to reveal</p>
         </div>
         <a class="scroll-cue" href="#our-story">Our story <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
     </header>
@@ -1326,6 +1720,269 @@
 
         const ambientBg = document.getElementById('ambient-bg');
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const invitationIntro = document.getElementById('invitation-intro');
+        const openInvitationButton = document.getElementById('open-invitation');
+        const skipIntroButton = document.getElementById('skip-intro');
+        const pageSections = document.querySelectorAll('header, main, footer');
+
+        const setPageInert = (isInert) => {
+            pageSections.forEach((section) => {
+                section.inert = isInert;
+            });
+        };
+
+        const rememberInvitationOpened = () => {
+            try {
+                sessionStorage.setItem('wedding-invite-opened', 'true');
+            } catch (storageError) {
+                console.warn('The invitation opening animation may appear again on your next visit.', storageError);
+            }
+        };
+
+        const dismissInvitationIntro = (animateEnvelope) => {
+            if (!invitationIntro || !document.documentElement.classList.contains('intro-active')) {
+                return;
+            }
+
+            rememberInvitationOpened();
+            document.documentElement.classList.remove('intro-active');
+            document.documentElement.classList.add('invitation-opened');
+            setPageInert(false);
+
+            if (animateEnvelope) {
+                invitationIntro.classList.add('is-opening');
+                window.setTimeout(() => invitationIntro.classList.add('is-dismissed'), 650);
+            } else {
+                invitationIntro.classList.add('is-dismissed');
+            }
+
+            invitationIntro.setAttribute('aria-hidden', 'true');
+            invitationIntro.inert = true;
+            window.setTimeout(() => {
+                invitationIntro.style.display = 'none';
+            }, animateEnvelope ? 1500 : 900);
+        };
+
+        if (document.documentElement.classList.contains('intro-active') && reduceMotion) {
+            dismissInvitationIntro(false);
+        } else if (document.documentElement.classList.contains('intro-active')) {
+            setPageInert(true);
+            openInvitationButton?.focus({ preventScroll: true });
+            openInvitationButton?.addEventListener('click', () => dismissInvitationIntro(true));
+            skipIntroButton?.addEventListener('click', () => dismissInvitationIntro(false));
+            invitationIntro?.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') {
+                    event.preventDefault();
+                    dismissInvitationIntro(false);
+                } else if (event.key === 'Tab') {
+                    const focusableButtons = [openInvitationButton, skipIntroButton].filter(Boolean);
+                    const firstButton = focusableButtons[0];
+                    const lastButton = focusableButtons[focusableButtons.length - 1];
+
+                    if (event.shiftKey && document.activeElement === firstButton) {
+                        event.preventDefault();
+                        lastButton.focus();
+                    } else if (!event.shiftKey && document.activeElement === lastButton) {
+                        event.preventDefault();
+                        firstButton.focus();
+                    }
+                }
+            });
+        }
+
+        const scratchDate = document.getElementById('scratch-date');
+        const scratchCover = document.getElementById('date-scratch-cover');
+        const scratchContext = scratchCover instanceof HTMLCanvasElement
+            ? scratchCover.getContext('2d')
+            : null;
+        const dateConfetti = document.getElementById('date-confetti');
+        const confettiContext = dateConfetti instanceof HTMLCanvasElement
+            ? dateConfetti.getContext('2d')
+            : null;
+
+        const launchDateConfetti = () => {
+            if (!(dateConfetti instanceof HTMLCanvasElement) || !confettiContext || reduceMotion) {
+                return;
+            }
+
+            const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            const scratchBounds = scratchDate?.getBoundingClientRect();
+            const originX = scratchBounds ? scratchBounds.left + scratchBounds.width / 2 : width / 2;
+            const originY = scratchBounds ? scratchBounds.top + scratchBounds.height / 2 : height / 2;
+            const colors = ['#f5dda8', '#c5a059', '#fff8e8', '#d6e1d7', '#b8904d'];
+            const pieces = Array.from({ length: 76 }, () => ({
+                x: originX,
+                y: originY,
+                velocityX: (Math.random() - 0.5) * 8,
+                velocityY: -2 - Math.random() * 6,
+                rotation: Math.random() * Math.PI,
+                rotationSpeed: (Math.random() - 0.5) * 0.18,
+                width: 3 + Math.random() * 5,
+                height: 5 + Math.random() * 8,
+                color: colors[Math.floor(Math.random() * colors.length)]
+            }));
+            const startedAt = performance.now();
+
+            dateConfetti.width = Math.round(width * pixelRatio);
+            dateConfetti.height = Math.round(height * pixelRatio);
+            confettiContext.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+
+            const animateConfetti = (now) => {
+                const elapsed = now - startedAt;
+                confettiContext.clearRect(0, 0, width, height);
+
+                pieces.forEach((piece) => {
+                    piece.x += piece.velocityX;
+                    piece.y += piece.velocityY;
+                    piece.velocityY += 0.14;
+                    piece.rotation += piece.rotationSpeed;
+                    confettiContext.save();
+                    confettiContext.translate(piece.x, piece.y);
+                    confettiContext.rotate(piece.rotation);
+                    confettiContext.fillStyle = piece.color;
+                    confettiContext.fillRect(-piece.width / 2, -piece.height / 2, piece.width, piece.height);
+                    confettiContext.restore();
+                });
+
+                if (elapsed < 1900) {
+                    window.requestAnimationFrame(animateConfetti);
+                } else {
+                    confettiContext.clearRect(0, 0, width, height);
+                }
+            };
+
+            window.requestAnimationFrame(animateConfetti);
+        };
+
+        if (scratchDate instanceof HTMLButtonElement && scratchCover instanceof HTMLCanvasElement && scratchContext) {
+            let scratchCells = new Set();
+            let isScratching = false;
+            let lastScratchPoint = null;
+            let hasRevealedDate = false;
+            let coverWidth = 0;
+            let coverHeight = 0;
+
+            const drawScratchCover = () => {
+                const bounds = scratchCover.getBoundingClientRect();
+                const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+                coverWidth = bounds.width;
+                coverHeight = bounds.height;
+                scratchCover.width = Math.round(coverWidth * pixelRatio);
+                scratchCover.height = Math.round(coverHeight * pixelRatio);
+                scratchContext.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+
+                const gold = scratchContext.createLinearGradient(0, 0, coverWidth, coverHeight);
+                gold.addColorStop(0, '#eedeb9');
+                gold.addColorStop(0.45, '#c8a764');
+                gold.addColorStop(1, '#a98548');
+                scratchContext.fillStyle = gold;
+                scratchContext.fillRect(0, 0, coverWidth, coverHeight);
+
+                scratchContext.strokeStyle = 'rgba(255, 248, 232, 0.55)';
+                scratchContext.lineWidth = 1;
+                scratchContext.strokeRect(5, 5, coverWidth - 10, coverHeight - 10);
+                scratchContext.fillStyle = '#fff7e4';
+                scratchContext.textAlign = 'center';
+                scratchContext.textBaseline = 'middle';
+                scratchContext.font = `600 ${Math.max(8, Math.min(10, coverHeight * 0.23))}px Montserrat, sans-serif`;
+                scratchContext.letterSpacing = '0.18em';
+                scratchContext.fillText('✦  RUB TO REVEAL  ✦', coverWidth / 2, coverHeight / 2);
+                scratchContext.letterSpacing = '0px';
+            };
+
+            const revealWeddingDate = () => {
+                if (hasRevealedDate) {
+                    return;
+                }
+
+                hasRevealedDate = true;
+                scratchDate.classList.add('is-revealed');
+                scratchDate.setAttribute('aria-label', 'Our wedding dates: 27 and 28 December 2026');
+                const hint = document.querySelector('.date-scratch-hint');
+                if (hint) {
+                    hint.textContent = 'Our dates are revealed — save the date!';
+                    hint.setAttribute('aria-hidden', 'false');
+                }
+                launchDateConfetti();
+            };
+
+            const clearScratchAt = (x, y) => {
+                const gridColumns = 10;
+                const gridRows = 3;
+                const cellWidth = coverWidth / gridColumns;
+                const cellHeight = coverHeight / gridRows;
+
+                for (let row = 0; row < gridRows; row += 1) {
+                    for (let column = 0; column < gridColumns; column += 1) {
+                        const centerX = (column + 0.5) * cellWidth;
+                        const centerY = (row + 0.5) * cellHeight;
+                        if (Math.hypot(centerX - x, centerY - y) < 30) {
+                            scratchCells.add(`${row}:${column}`);
+                        }
+                    }
+                }
+
+                scratchContext.globalCompositeOperation = 'destination-out';
+                scratchContext.beginPath();
+                scratchContext.arc(x, y, 23, 0, Math.PI * 2);
+                scratchContext.fill();
+                scratchContext.globalCompositeOperation = 'source-over';
+
+                if (scratchCells.size >= 13) {
+                    revealWeddingDate();
+                }
+            };
+
+            scratchCover.addEventListener('pointerdown', (event) => {
+                if (hasRevealedDate) return;
+                event.preventDefault();
+                isScratching = true;
+                scratchCover.setPointerCapture(event.pointerId);
+                const bounds = scratchCover.getBoundingClientRect();
+                lastScratchPoint = { x: event.clientX - bounds.left, y: event.clientY - bounds.top };
+                clearScratchAt(lastScratchPoint.x, lastScratchPoint.y);
+            });
+
+            scratchCover.addEventListener('pointermove', (event) => {
+                if (!isScratching || hasRevealedDate) return;
+                const bounds = scratchCover.getBoundingClientRect();
+                const point = { x: event.clientX - bounds.left, y: event.clientY - bounds.top };
+                scratchContext.globalCompositeOperation = 'destination-out';
+                scratchContext.strokeStyle = 'rgba(0, 0, 0, 1)';
+                scratchContext.lineWidth = 46;
+                scratchContext.lineCap = 'round';
+                scratchContext.beginPath();
+                scratchContext.moveTo(lastScratchPoint.x, lastScratchPoint.y);
+                scratchContext.lineTo(point.x, point.y);
+                scratchContext.stroke();
+                scratchContext.globalCompositeOperation = 'source-over';
+                clearScratchAt(point.x, point.y);
+                lastScratchPoint = point;
+            });
+
+            const endScratching = () => {
+                isScratching = false;
+                lastScratchPoint = null;
+            };
+            scratchCover.addEventListener('pointerup', endScratching);
+            scratchCover.addEventListener('pointercancel', endScratching);
+
+            scratchDate.addEventListener('click', (event) => {
+                if (event.detail === 0) {
+                    revealWeddingDate();
+                }
+            });
+
+            window.addEventListener('resize', () => {
+                if (!hasRevealedDate) {
+                    scratchCells = new Set();
+                    drawScratchCover();
+                }
+            }, { passive: true });
+            drawScratchCover();
+        }
 
         if (ambientBg && !reduceMotion) {
             const sparkleCount = window.innerWidth < 600 ? 10 : 18;
