@@ -544,77 +544,55 @@
             animation: name-foil 2.4s cubic-bezier(0.2, 0.7, 0.2, 1) 0.15s both;
         }
 
-        .hero-date {
+        .event-schedule-scratch {
             position: relative;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-top: 2rem;
-            min-height: 3.5rem;
-            padding: 0;
-            border: 1px solid rgba(245, 221, 168, 0.7);
-            border-radius: 999px;
-            background: rgba(31, 27, 21, 0.28);
-            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.14), inset 0 0 0 3px rgba(245, 221, 168, 0.06);
-            color: #f7ead0;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-        }
-
-        .hero-date__content {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.6rem 1.25rem;
-            white-space: nowrap;
-        }
-
-        .hero-date strong {
-            color: #f2d997;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.55rem;
-            line-height: 1;
-        }
-
-        .hero-date-scratch {
+            display: grid;
+            width: 100%;
+            min-height: 5.25rem;
+            align-content: center;
+            justify-items: center;
+            gap: 0.2rem;
+            margin: 0.75rem 0 1.15rem;
+            padding: 0.7rem 0.5rem;
             appearance: none;
-            border: 0;
-            color: inherit;
+            border: 1px solid rgba(197, 160, 89, 0.35);
+            border-radius: 0.65rem;
+            background: linear-gradient(145deg, rgba(255,255,255,0.94), rgba(249,245,236,0.96));
+            box-shadow: inset 0 0 0 3px rgba(197, 160, 89, 0.045);
+            color: var(--charcoal);
             font: inherit;
             cursor: crosshair;
             -webkit-tap-highlight-color: transparent;
             touch-action: none;
         }
 
-        .hero-date-scratch:focus-visible {
-            outline: 2px solid #fff2d2;
-            outline-offset: 5px;
+        .event-schedule-scratch:focus-visible {
+            outline: 2px solid var(--primary-gold);
+            outline-offset: 4px;
         }
 
-        .date-scratch-cover {
+        .event-schedule-scratch .event-date,
+        .event-schedule-scratch .event-time {
+            margin: 0;
+            position: relative;
+            z-index: 0;
+        }
+
+        .schedule-scratch-cover {
             position: absolute;
             inset: 0;
             width: 100%;
             height: 100%;
+            z-index: 1;
             border-radius: inherit;
             transition: opacity 0.65s ease, visibility 0.65s ease;
             touch-action: none;
         }
 
-        .hero-date-scratch.is-revealed .date-scratch-cover {
+        .event-schedule-scratch.is-revealed .schedule-scratch-cover {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-        }
-
-        .date-scratch-hint {
-            margin-top: 0.65rem !important;
-            color: rgba(255, 248, 232, 0.8);
-            font-size: 0.58rem !important;
-            letter-spacing: 0.22em !important;
-            animation: hint-pulse 2.8s ease-in-out infinite;
         }
 
         .scroll-cue {
@@ -1368,23 +1346,6 @@
                 letter-spacing: 0.12em;
             }
 
-            .hero-date {
-                display: inline-flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 0.35rem 0.45rem;
-                font-size: 0.61rem;
-            }
-
-            .hero-date__content {
-                gap: 0.45rem;
-                padding: 0.65rem 0.85rem;
-            }
-
-            .hero-date strong {
-                font-size: 1.3rem;
-            }
-
             section,
             .countdown-section {
                 padding: 4.5rem 1.15rem;
@@ -1431,10 +1392,6 @@
                 font-size: 0.72rem;
             }
 
-            .hero-date {
-                letter-spacing: 0.1em;
-            }
-
             .countdown-grid {
                 grid-template-columns: 1fr;
             }
@@ -1472,7 +1429,7 @@
 
             .intro-envelope *,
             .intro-scene,
-            .hero-date-scratch *,
+            .event-schedule-scratch *,
             .events-container .event-card {
                 transition-duration: 0.01ms !important;
                 animation-duration: 0.01ms !important;
@@ -1587,11 +1544,6 @@
             <h4>Together with our families</h4>
             <h1><span class="name-foil">Ashmitha</span> <span class="ampersand">&amp;</span> <span class="name-foil">Belmer</span></h1>
             <p>We are getting married</p>
-            <button class="hero-date hero-date-scratch" id="scratch-date" type="button" aria-label="Scratch to reveal our wedding dates, 27 and 28 December 2026">
-                <span class="hero-date__content" aria-hidden="true"><strong>27</strong><span>&amp;</span><strong>28</strong><span>December 2026</span></span>
-                <canvas class="date-scratch-cover" id="date-scratch-cover" aria-hidden="true"></canvas>
-            </button>
-            <p class="date-scratch-hint" aria-live="polite">A little surprise — rub to reveal</p>
         </div>
         <a class="scroll-cue" href="#our-story">Our story <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
     </header>
@@ -1604,7 +1556,7 @@
                 <p class="section-kicker">Our Story</p>
                 <h2 class="section-title">A New Beginning</h2>
                 <div class="heading-ornament" aria-hidden="true"><figure class="wedding-mark wedding-mark--small"><svg class="wedding-mark__svg" viewBox="0 0 160 130"><use href="#wedding-mark-icon"/></svg></figure></div>
-                <p class="section-intro">A glimpse of Ashmitha and Belmer as children—these two kids are getting married and beginning their life together on 28 December 2026.</p>
+                <p class="section-intro">A glimpse of Ashmitha and Belmer as children—these two kids are getting married and beginning their life together this December.</p>
             </div>
             <div class="kids-grid">
                 <!-- Belmer's Childhood Photo -->
@@ -1629,15 +1581,18 @@
             <p class="section-kicker">Join the celebration</p>
             <h2 class="section-title">Wedding Events</h2>
             <div class="heading-ornament" aria-hidden="true"><figure class="wedding-mark wedding-mark--small"><svg class="wedding-mark__svg" viewBox="0 0 160 130"><use href="#wedding-mark-icon"/></svg></figure></div>
-            <p class="section-intro">Your presence will make these moments even more memorable.</p>
+            <p class="section-intro">Scratch each gold panel to reveal that event’s date and time. Venues and directions are below.</p>
         </div>
         <div class="events-container">
             <!-- Engagement Card -->
             <div class="event-card reveal">
                 <i class="fas fa-ring event-icon" aria-hidden="true"></i>
                 <h3>Engagement</h3>
-                <div class="event-date">December 27</div>
-                <div class="event-time"><i class="far fa-clock"></i> 5:00 PM</div>
+                <button class="event-schedule-scratch" type="button" aria-label="Scratch to reveal the engagement date and time: December 27, 2026 at 5:00 PM">
+                    <span class="event-date" aria-hidden="true">December 27, 2026</span>
+                    <span class="event-time" aria-hidden="true"><i class="far fa-clock"></i> 5:00 PM</span>
+                    <canvas class="schedule-scratch-cover" aria-hidden="true"></canvas>
+                </button>
                 <div class="event-location">
                     <i class="fas fa-map-marker-alt"></i> Sree Lekshmi Kalyana Mandapam
                 </div>
@@ -1648,8 +1603,11 @@
             <div class="event-card reveal">
                 <i class="fas fa-church event-icon" aria-hidden="true"></i>
                 <h3>Marriage Ceremony</h3>
-                <div class="event-date">December 28</div>
-                <div class="event-time"><i class="far fa-clock"></i> 9:15 AM to 10:15 AM</div>
+                <button class="event-schedule-scratch" type="button" aria-label="Scratch to reveal the marriage ceremony date and time: December 28, 2026 from 9:15 AM to 10:15 AM">
+                    <span class="event-date" aria-hidden="true">December 28, 2026</span>
+                    <span class="event-time" aria-hidden="true"><i class="far fa-clock"></i> 9:15 AM to 10:15 AM</span>
+                    <canvas class="schedule-scratch-cover" aria-hidden="true"></canvas>
+                </button>
                 <div class="event-location">
                     <i class="fas fa-map-marker-alt"></i> C.S.I Charode Church
                 </div>
@@ -1790,17 +1748,13 @@
             });
         }
 
-        const scratchDate = document.getElementById('scratch-date');
-        const scratchCover = document.getElementById('date-scratch-cover');
-        const scratchContext = scratchCover instanceof HTMLCanvasElement
-            ? scratchCover.getContext('2d')
-            : null;
+        const scheduleScratchCards = document.querySelectorAll('.event-schedule-scratch');
         const dateConfetti = document.getElementById('date-confetti');
         const confettiContext = dateConfetti instanceof HTMLCanvasElement
             ? dateConfetti.getContext('2d')
             : null;
 
-        const launchDateConfetti = () => {
+        const launchDateConfetti = (source) => {
             if (!(dateConfetti instanceof HTMLCanvasElement) || !confettiContext || reduceMotion) {
                 return;
             }
@@ -1808,7 +1762,7 @@
             const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
             const width = window.innerWidth;
             const height = window.innerHeight;
-            const scratchBounds = scratchDate?.getBoundingClientRect();
+            const scratchBounds = source.getBoundingClientRect();
             const originX = scratchBounds ? scratchBounds.left + scratchBounds.width / 2 : width / 2;
             const originY = scratchBounds ? scratchBounds.top + scratchBounds.height / 2 : height / 2;
             const colors = ['#f5dda8', '#c5a059', '#fff8e8', '#d6e1d7', '#b8904d'];
@@ -1856,11 +1810,20 @@
             window.requestAnimationFrame(animateConfetti);
         };
 
-        if (scratchDate instanceof HTMLButtonElement && scratchCover instanceof HTMLCanvasElement && scratchContext) {
-            let scratchCells = new Set();
+        scheduleScratchCards.forEach((scratchCard) => {
+            const scratchCover = scratchCard.querySelector('.schedule-scratch-cover');
+            const scratchContext = scratchCover instanceof HTMLCanvasElement
+                ? scratchCover.getContext('2d')
+                : null;
+
+            if (!(scratchCard instanceof HTMLButtonElement) || !(scratchCover instanceof HTMLCanvasElement) || !scratchContext) {
+                return;
+            }
+
+            let scratchedCells = new Set();
             let isScratching = false;
             let lastScratchPoint = null;
-            let hasRevealedDate = false;
+            let isRevealed = false;
             let coverWidth = 0;
             let coverHeight = 0;
 
@@ -1886,26 +1849,24 @@
                 scratchContext.fillStyle = '#fff7e4';
                 scratchContext.textAlign = 'center';
                 scratchContext.textBaseline = 'middle';
-                scratchContext.font = `600 ${Math.max(8, Math.min(10, coverHeight * 0.23))}px Montserrat, sans-serif`;
-                scratchContext.letterSpacing = '0.18em';
+                scratchContext.font = `600 ${Math.max(8, Math.min(10, coverHeight * 0.18))}px Montserrat, sans-serif`;
+                scratchContext.letterSpacing = '0.12em';
                 scratchContext.fillText('✦  RUB TO REVEAL  ✦', coverWidth / 2, coverHeight / 2);
                 scratchContext.letterSpacing = '0px';
             };
 
-            const revealWeddingDate = () => {
-                if (hasRevealedDate) {
+            const revealEventSchedule = () => {
+                if (isRevealed) {
                     return;
                 }
 
-                hasRevealedDate = true;
-                scratchDate.classList.add('is-revealed');
-                scratchDate.setAttribute('aria-label', 'Our wedding dates: 27 and 28 December 2026');
-                const hint = document.querySelector('.date-scratch-hint');
-                if (hint) {
-                    hint.textContent = 'Our dates are revealed — save the date!';
-                    hint.setAttribute('aria-hidden', 'false');
+                isRevealed = true;
+                scratchCard.classList.add('is-revealed');
+                const scheduleLabel = scratchCard.getAttribute('aria-label');
+                if (scheduleLabel) {
+                    scratchCard.setAttribute('aria-label', scheduleLabel.replace('Scratch to reveal', 'Revealed'));
                 }
-                launchDateConfetti();
+                launchDateConfetti(scratchCard);
             };
 
             const clearScratchAt = (x, y) => {
@@ -1919,7 +1880,7 @@
                         const centerX = (column + 0.5) * cellWidth;
                         const centerY = (row + 0.5) * cellHeight;
                         if (Math.hypot(centerX - x, centerY - y) < 30) {
-                            scratchCells.add(`${row}:${column}`);
+                            scratchedCells.add(`${row}:${column}`);
                         }
                     }
                 }
@@ -1930,13 +1891,13 @@
                 scratchContext.fill();
                 scratchContext.globalCompositeOperation = 'source-over';
 
-                if (scratchCells.size >= 13) {
-                    revealWeddingDate();
+                if (scratchedCells.size >= 8) {
+                    revealEventSchedule();
                 }
             };
 
             scratchCover.addEventListener('pointerdown', (event) => {
-                if (hasRevealedDate) return;
+                if (isRevealed) return;
                 event.preventDefault();
                 isScratching = true;
                 scratchCover.setPointerCapture(event.pointerId);
@@ -1946,7 +1907,7 @@
             });
 
             scratchCover.addEventListener('pointermove', (event) => {
-                if (!isScratching || hasRevealedDate) return;
+                if (!isScratching || isRevealed) return;
                 const bounds = scratchCover.getBoundingClientRect();
                 const point = { x: event.clientX - bounds.left, y: event.clientY - bounds.top };
                 scratchContext.globalCompositeOperation = 'destination-out';
@@ -1969,20 +1930,20 @@
             scratchCover.addEventListener('pointerup', endScratching);
             scratchCover.addEventListener('pointercancel', endScratching);
 
-            scratchDate.addEventListener('click', (event) => {
+            scratchCard.addEventListener('click', (event) => {
                 if (event.detail === 0) {
-                    revealWeddingDate();
+                    revealEventSchedule();
                 }
             });
 
             window.addEventListener('resize', () => {
-                if (!hasRevealedDate) {
-                    scratchCells = new Set();
+                if (!isRevealed) {
+                    scratchedCells = new Set();
                     drawScratchCover();
                 }
             }, { passive: true });
             drawScratchCover();
-        }
+        });
 
         if (ambientBg && !reduceMotion) {
             const sparkleCount = window.innerWidth < 600 ? 10 : 18;
