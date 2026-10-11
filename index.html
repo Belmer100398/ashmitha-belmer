@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ashmitha &amp; Belmer - Wedding Invitation</title>
-    <link rel="icon" type="image/svg+xml" href="assets/ab-monogram.svg">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon-mark.svg">
     <meta name="theme-color" content="#2c2c2c">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&amp;family=Montserrat:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&amp;family=Montserrat:wght@300;400;500;600&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -25,6 +25,11 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
         }
 
         body {
@@ -315,17 +320,6 @@
             letter-spacing: 0;
         }
 
-        .music-credit {
-            margin-top: 1.15rem;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.66rem;
-            letter-spacing: 0;
-        }
-
-        .music-credit a {
-            color: rgba(245, 221, 168, 0.75);
-        }
-
         /* Invitation refinements */
         html {
             scroll-behavior: smooth;
@@ -371,47 +365,61 @@
             max-width: 860px;
         }
 
-        .monogram {
-            width: 4.9rem;
-            height: 4.9rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--dark-gold);
-            border: 1px solid currentColor;
-            border-radius: 50%;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: -0.12em;
-            line-height: 1;
+        .wedding-mark {
+            --mark-leaf: rgba(122, 154, 138, 0.58);
+            --mark-leaf-soft: rgba(168, 191, 176, 0.42);
+            --mark-berry: rgba(197, 160, 89, 0.35);
+            --mark-stem: rgba(122, 154, 138, 0.38);
+            display: block;
+            margin-inline: auto;
+            color: rgba(44, 44, 44, 0.84);
         }
 
-        .monogram em {
-            position: relative;
-            z-index: 1;
-            margin: 0 -0.12em;
-            font-size: 0.8em;
-            font-style: italic;
-            font-weight: 400;
+        .wedding-mark--on-dark {
+            --mark-leaf: rgba(186, 206, 194, 0.42);
+            --mark-leaf-soft: rgba(210, 224, 216, 0.28);
+            --mark-berry: rgba(245, 221, 168, 0.55);
+            --mark-stem: rgba(200, 218, 208, 0.32);
+            color: rgba(240, 230, 210, 0.94);
         }
 
-        .monogram--hero {
-            width: 5.8rem;
-            height: 5.8rem;
-            margin-bottom: 1.7rem;
-            color: #f5dda8;
-            border-color: rgba(245, 221, 168, 0.85);
-            background: rgba(30, 28, 23, 0.2);
-            box-shadow: 0 0 0 0.45rem rgba(245, 221, 168, 0.12);
-            font-size: 2.45rem;
+        .wedding-mark__svg {
+            display: block;
+            width: 100%;
+            height: auto;
+            overflow: visible;
         }
 
-        .monogram--small {
-            width: 2rem;
-            height: 2rem;
-            flex: 0 0 2rem;
-            font-size: 0.95rem;
+        .wedding-mark--hero {
+            width: min(248px, 74vw);
+            margin-bottom: 1.15rem;
+        }
+
+        .wedding-mark--on-dark .wedding-mark__svg {
+            filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.18));
+        }
+
+        .wedding-mark--small {
+            width: 84px;
+            flex: 0 0 auto;
+        }
+
+        .wedding-mark--footer {
+            width: min(210px, 54vw);
+            margin-bottom: 1rem;
+        }
+
+        .mark-leaf { fill: var(--mark-leaf); }
+        .mark-leaf-soft { fill: var(--mark-leaf-soft); }
+        .mark-berry, .mark-berries circle { fill: var(--mark-berry); }
+        .mark-stem { stroke: var(--mark-stem); }
+        .mark-ink { fill: currentColor; }
+        .mark-sub { fill: currentColor; opacity: 0.72; }
+        .mark-monogram { fill: url(#mark-gold); }
+        .mark-initials-rule {
+            stroke: currentColor;
+            stroke-width: 0.6;
+            opacity: 0.45;
         }
 
         .hero-content h4 {
@@ -750,12 +758,6 @@
             z-index: 1;
         }
 
-        .monogram--footer {
-            margin-bottom: 1rem;
-            color: var(--primary-gold);
-            border-color: rgba(197, 160, 89, 0.8);
-        }
-
         footer h2 {
             margin-bottom: 0.6rem;
         }
@@ -763,6 +765,21 @@
         @keyframes nudge {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(5px); }
+        }
+
+        @media (max-width: 900px) {
+            section {
+                padding: 5rem 1.25rem;
+            }
+
+            .events-container,
+            .kids-grid {
+                gap: 1.5rem;
+            }
+
+            .countdown-grid {
+                gap: 1rem;
+            }
         }
 
         @media (max-width: 600px) {
@@ -775,6 +792,10 @@
                 inset: 0.7rem;
             }
 
+            .hero-content {
+                max-width: 100%;
+            }
+
             .hero-content h4 {
                 letter-spacing: 0.17em;
             }
@@ -785,8 +806,16 @@
             }
 
             .hero-date {
-                gap: 0.45rem;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.35rem 0.45rem;
+                padding: 0.65rem 0.85rem;
                 font-size: 0.61rem;
+            }
+
+            .hero-date strong {
+                font-size: 1.3rem;
             }
 
             section,
@@ -826,6 +855,28 @@
             }
         }
 
+        @media (max-width: 420px) {
+            .hero-content h1 {
+                font-size: clamp(2.5rem, 18vw, 3.6rem);
+            }
+
+            .hero-content p {
+                font-size: 0.72rem;
+            }
+
+            .hero-date {
+                letter-spacing: 0.1em;
+            }
+
+            .countdown-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .kid-card img {
+                height: 250px;
+            }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             *,
             *::before,
@@ -844,6 +895,62 @@
     </style>
 </head>
 <body>
+    <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" focusable="false" aria-hidden="true" style="position:absolute">
+        <defs>
+            <linearGradient id="mark-gold" x1="18%" y1="8%" x2="82%" y2="92%">
+                <stop offset="0%" stop-color="#f2e2c0"/>
+                <stop offset="42%" stop-color="#d4b06a"/>
+                <stop offset="100%" stop-color="#a8843f"/>
+            </linearGradient>
+            <path id="mark-arc" d="M 30 118 A 120 120 0 0 1 210 118" fill="none"/>
+            <symbol id="wedding-mark" viewBox="0 0 240 260">
+                <g class="mark-leaves">
+                    <ellipse class="mark-leaf" cx="52" cy="198" rx="15" ry="6.5" transform="rotate(-38 52 198)"/>
+                    <ellipse class="mark-leaf" cx="42" cy="212" rx="13" ry="5.5" transform="rotate(-58 42 212)"/>
+                    <ellipse class="mark-leaf" cx="68" cy="182" rx="14" ry="6" transform="rotate(-18 68 182)"/>
+                    <ellipse class="mark-leaf" cx="188" cy="198" rx="15" ry="6.5" transform="rotate(38 188 198)"/>
+                    <ellipse class="mark-leaf" cx="198" cy="212" rx="13" ry="5.5" transform="rotate(58 198 212)"/>
+                    <ellipse class="mark-leaf" cx="172" cy="182" rx="14" ry="6" transform="rotate(18 172 182)"/>
+                    <ellipse class="mark-leaf-soft" cx="88" cy="218" rx="12" ry="5" transform="rotate(-8 88 218)"/>
+                    <ellipse class="mark-leaf-soft" cx="152" cy="218" rx="12" ry="5" transform="rotate(8 152 218)"/>
+                    <ellipse class="mark-leaf-soft" cx="120" cy="228" rx="14" ry="5.5"/>
+                    <ellipse class="mark-leaf-soft" cx="72" cy="206" rx="11" ry="4.5" transform="rotate(-28 72 206)"/>
+                    <ellipse class="mark-leaf-soft" cx="168" cy="206" rx="11" ry="4.5" transform="rotate(28 168 206)"/>
+                    <ellipse class="mark-leaf-soft" cx="105" cy="222" rx="10" ry="4" transform="rotate(-12 105 222)"/>
+                    <ellipse class="mark-leaf-soft" cx="135" cy="222" rx="10" ry="4" transform="rotate(12 135 222)"/>
+                </g>
+                <g class="mark-berries">
+                    <circle cx="58" cy="190" r="2.2"/>
+                    <circle cx="182" cy="190" r="2.2"/>
+                    <circle cx="98" cy="214" r="1.8"/>
+                    <circle cx="142" cy="214" r="1.8"/>
+                    <circle cx="120" cy="220" r="2"/>
+                </g>
+                <path class="mark-stem" d="M 46 208 Q 78 232 120 236 Q 162 232 194 208" fill="none" stroke-width="1.1"/>
+                <text class="mark-ink mark-arc-text" font-family="Montserrat, sans-serif" font-size="7.2" letter-spacing="0.34em">
+                    <textPath href="#mark-arc" startOffset="50%" text-anchor="middle">ASHMITHA CANDISH</textPath>
+                </text>
+                <text class="mark-monogram" x="120" y="146" text-anchor="middle" font-family="'Pinyon Script', cursive" font-size="62" letter-spacing="-0.02em">AC</text>
+                <path class="mark-initials-rule" d="M 106 152 H 134"/>
+                <text class="mark-monogram" x="120" y="168" text-anchor="middle" font-family="'Pinyon Script', cursive" font-size="56">B</text>
+                <text class="mark-ink mark-partner" x="120" y="198" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="7.8" letter-spacing="0.3em">BELMER</text>
+                <text class="mark-sub mark-year" x="120" y="212" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="6.8" letter-spacing="0.22em">2026</text>
+            </symbol>
+            <symbol id="wedding-mark-icon" viewBox="0 0 160 130">
+                <ellipse class="mark-leaf" cx="34" cy="88" rx="13" ry="5.5" transform="rotate(-38 34 88)"/>
+                <ellipse class="mark-leaf" cx="126" cy="88" rx="13" ry="5.5" transform="rotate(38 126 88)"/>
+                <ellipse class="mark-leaf-soft" cx="58" cy="102" rx="10" ry="4" transform="rotate(-18 58 102)"/>
+                <ellipse class="mark-leaf-soft" cx="102" cy="102" rx="10" ry="4" transform="rotate(18 102 102)"/>
+                <ellipse class="mark-leaf-soft" cx="80" cy="112" rx="12" ry="4.5"/>
+                <circle class="mark-berry" cx="44" cy="82" r="1.8"/>
+                <circle class="mark-berry" cx="116" cy="82" r="1.8"/>
+                <path class="mark-stem" d="M 32 96 Q 58 114 80 118 Q 102 114 128 96" fill="none" stroke-width="1"/>
+                <text class="mark-monogram" x="80" y="58" text-anchor="middle" font-family="'Pinyon Script', cursive" font-size="44" letter-spacing="-0.02em">AC</text>
+                <path class="mark-initials-rule" d="M 70 66 H 90"/>
+                <text class="mark-monogram" x="80" y="75" text-anchor="middle" font-family="'Pinyon Script', cursive" font-size="40">B</text>
+            </symbol>
+        </defs>
+    </svg>
     <!-- Background music: Pachelbel's Canon in D, piano transcription performed by Lee Galloway (CC BY-SA 3.0). -->
     <audio id="background-music" autoplay preload="auto">
         <source src="assets/canon-in-d-piano.ogg" type="audio/ogg; codecs=vorbis">
@@ -852,7 +959,9 @@
     <!-- Hero Section -->
     <header>
         <div class="hero-content">
-            <div class="monogram monogram--hero" aria-label="Ashmitha and Belmer"><span>A</span><em>&amp;</em><span>B</span></div>
+            <figure class="wedding-mark wedding-mark--on-dark wedding-mark--hero" role="img" aria-label="Ashmitha Candish and Belmer, 2026">
+                <svg class="wedding-mark__svg" viewBox="0 0 240 260" aria-hidden="true"><use href="#wedding-mark"/></svg>
+            </figure>
             <h4>Together with our families</h4>
             <h1>Ashmitha <span class="ampersand">&amp;</span> Belmer</h1>
             <p>We are getting married</p>
@@ -868,7 +977,7 @@
             <div class="section-heading">
                 <p class="section-kicker">Our Story</p>
                 <h2 class="section-title">From Childhood to Forever</h2>
-                <div class="heading-ornament" aria-hidden="true"><div class="monogram monogram--small"><span>A</span><em>&amp;</em><span>B</span></div></div>
+                <div class="heading-ornament" aria-hidden="true"><figure class="wedding-mark wedding-mark--small"><svg class="wedding-mark__svg" viewBox="0 0 160 130"><use href="#wedding-mark-icon"/></svg></figure></div>
                 <p class="section-intro">From two little smiles to one beautiful promise — these two kids are getting married now.</p>
             </div>
             <div class="kids-grid">
@@ -893,7 +1002,7 @@
         <div class="section-heading">
             <p class="section-kicker">Join the celebration</p>
             <h2 class="section-title">Wedding Events</h2>
-            <div class="heading-ornament" aria-hidden="true"><div class="monogram monogram--small"><span>A</span><em>&amp;</em><span>B</span></div></div>
+            <div class="heading-ornament" aria-hidden="true"><figure class="wedding-mark wedding-mark--small"><svg class="wedding-mark__svg" viewBox="0 0 160 130"><use href="#wedding-mark-icon"/></svg></figure></div>
             <p class="section-intro">Your presence will make these moments even more memorable.</p>
         </div>
         <div class="events-container">
@@ -902,10 +1011,11 @@
                 <i class="fas fa-ring event-icon" aria-hidden="true"></i>
                 <h3>Engagement</h3>
                 <div class="event-date">December 27</div>
+                <div class="event-time"><i class="far fa-clock"></i> 5:00 PM</div>
                 <div class="event-location">
-                    <i class="fas fa-map-marker-alt"></i> C.S.I Charode Church
+                    <i class="fas fa-map-marker-alt"></i> Sree Lekshmi Kalyana Mandapam
                 </div>
-                <a href="https://maps.google.com/?q=C.S.I+Charode+Church" target="_blank" rel="noopener noreferrer" class="btn">View Map</a>
+                <a href="https://maps.app.goo.gl/j3VALvWyrDyqacRU6" target="_blank" rel="noopener noreferrer" class="btn">View Map</a>
             </div>
 
             <!-- Wedding Ceremony Card -->
@@ -913,11 +1023,11 @@
                 <i class="fas fa-church event-icon" aria-hidden="true"></i>
                 <h3>Marriage Ceremony</h3>
                 <div class="event-date">December 28</div>
-                <div class="event-time"><i class="far fa-clock"></i> 10:00 AM</div>
+                <div class="event-time"><i class="far fa-clock"></i> 9:15 AM to 10:15 AM</div>
                 <div class="event-location">
                     <i class="fas fa-map-marker-alt"></i> C.S.I Charode Church
                 </div>
-                <a href="https://maps.google.com/?q=C.S.I+Charode+Church" target="_blank" rel="noopener noreferrer" class="btn">View Map</a>
+                <a href="https://maps.app.goo.gl/K4gpEd7VQ6i5E7oN6" target="_blank" rel="noopener noreferrer" class="btn">View Map</a>
             </div>
         </div>
     </section>
@@ -928,7 +1038,7 @@
             <div class="section-heading">
                 <p class="section-kicker">Save the date</p>
                 <h2 class="section-title" id="countdown-title">Countdown to Our Big Day</h2>
-                <div class="heading-ornament" aria-hidden="true"><div class="monogram monogram--small"><span>A</span><em>&amp;</em><span>B</span></div></div>
+                <div class="heading-ornament" aria-hidden="true"><figure class="wedding-mark wedding-mark--small"><svg class="wedding-mark__svg" viewBox="0 0 160 130"><use href="#wedding-mark-icon"/></svg></figure></div>
                 <p class="countdown-copy">Counting every second until we say “I do”.</p>
             </div>
             <div class="countdown-grid" id="countdown">
@@ -955,12 +1065,13 @@
 
     <!-- Footer -->
     <footer>
-        <div class="monogram monogram--footer" aria-label="Ashmitha and Belmer"><span>A</span><em>&amp;</em><span>B</span></div>
+        <figure class="wedding-mark wedding-mark--on-dark wedding-mark--footer" role="img" aria-label="Ashmitha Candish and Belmer, 2026">
+            <svg class="wedding-mark__svg" viewBox="0 0 240 260" aria-hidden="true"><use href="#wedding-mark"/></svg>
+        </figure>
         <h2>Ashmitha &amp; Belmer</h2>
         <p class="family-note">With love from our families</p>
         <p class="blessing">Your presence and prayers are the greatest gift to us.</p>
         <p>We can't wait to celebrate with you!</p>
-        <p class="music-credit">Background piano: <a href="https://commons.wikimedia.org/wiki/File:Pachelbel%27s_Canon.ogg" target="_blank" rel="noopener noreferrer">Canon in D</a> performed by Lee Galloway · <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></p>
     </footer>
 
     <!-- Countdown Script -->
@@ -981,7 +1092,7 @@
             document.addEventListener("keydown", startBackgroundMusic, { once: true });
         }
 
-        const weddingDate = new Date("December 28, 2026 10:00:00").getTime();
+        const weddingDate = new Date("December 28, 2026 9:15:00").getTime();
 
         function updateCountdown() {
             const now = new Date().getTime();
